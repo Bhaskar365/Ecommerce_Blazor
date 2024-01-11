@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Shop.DataModels.Models;
 using Shop.Logic.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ShoppingCartDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+});
 builder.Services.AddScoped<IAdminService, AdminService>();
 
 var app = builder.Build();

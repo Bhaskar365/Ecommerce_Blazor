@@ -1,19 +1,39 @@
 ﻿@inherits LayoutComponentBase
 
+@inject NavigationManager navManager;
+
 <PageTitle>Shop.Admin</PageTitle>
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+
+    @if (isAdminLoggedIn)
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+        @if (isAdminLoggedIn)
+        {
+            <div class="top-row px-4">
+                <a href="#" @onclick="Logout">Logout</a>
+            </div>
+        }
 
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+
+@code 
+{
+    public bool isAdminLoggedIn = false;
+
+    public void Logout()
+    {
+        navManager.NavigateTo("/login");
+    }
+}

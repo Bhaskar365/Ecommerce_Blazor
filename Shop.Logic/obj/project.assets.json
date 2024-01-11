@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Shop.DataModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Shop.DataModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shop.DataModels.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Shop.DataModels/1.0.0": {
+      "type": "project",
+      "path": "../Shop.DataModels/Shop.DataModels.csproj",
+      "msbuildProject": "../Shop.DataModels/Shop.DataModels.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Shop.DataModels >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\bdas\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.DataModels\\Shop.DataModels.csproj": {
+              "projectPath": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.DataModels\\Shop.DataModels.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

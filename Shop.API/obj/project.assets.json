@@ -88,6 +88,29 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Shop.DataModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Shop.DataModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shop.DataModels.dll": {}
+        }
+      },
+      "Shop.Logic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Shop.DataModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Shop.Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shop.Logic.dll": {}
+        }
       }
     }
   },
@@ -429,10 +452,22 @@
         "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "Shop.DataModels/1.0.0": {
+      "type": "project",
+      "path": "../Shop.DataModels/Shop.DataModels.csproj",
+      "msbuildProject": "../Shop.DataModels/Shop.DataModels.csproj"
+    },
+    "Shop.Logic/1.0.0": {
+      "type": "project",
+      "path": "../Shop.Logic/Shop.Logic.csproj",
+      "msbuildProject": "../Shop.Logic/Shop.Logic.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Shop.DataModels >= 1.0.0",
+      "Shop.Logic >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -468,7 +503,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.DataModels\\Shop.DataModels.csproj": {
+              "projectPath": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.DataModels\\Shop.DataModels.csproj"
+            },
+            "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Logic\\Shop.Logic.csproj": {
+              "projectPath": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Logic\\Shop.Logic.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

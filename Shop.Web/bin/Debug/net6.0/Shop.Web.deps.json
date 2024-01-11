@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Shop.Web/1.0.0": {
+        "dependencies": {
+          "Shop.DataModels": "1.0.0"
+        },
         "runtime": {
           "Shop.Web.dll": {}
+        }
+      },
+      "Shop.DataModels/1.0.0": {
+        "runtime": {
+          "Shop.DataModels.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Shop.Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Shop.DataModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

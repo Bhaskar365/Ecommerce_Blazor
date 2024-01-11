@@ -22,16 +22,32 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Category.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Master.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Orders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Products.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/Pages/Stock.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2sucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Angular_RunningPrograms/Blazor_Ecommerce/ShoppingCart/Shop.Admin/_Imports.razor]

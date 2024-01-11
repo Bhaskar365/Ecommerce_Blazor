@@ -1,6 +1,6 @@
 ﻿namespace Shop.Web.Services
 {
-    public class FrontEndService
+    public class FrontEndService : IFrontEndService
     {
 
     }

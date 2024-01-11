@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Shop.Logic/1.0.0": {
+        "dependencies": {
+          "Shop.DataModels": "1.0.0"
+        },
+        "runtime": {
+          "Shop.Logic.dll": {}
+        }
+      },
+      "Shop.DataModels/1.0.0": {
+        "runtime": {
+          "Shop.DataModels.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Shop.Logic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Shop.DataModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

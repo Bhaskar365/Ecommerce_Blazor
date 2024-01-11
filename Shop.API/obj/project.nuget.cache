@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bMSTx3YqOVEaEE/tdexrqd+9qznaG+VXa6xj1pgr9jBOvJmcsualQXy9YdqARA2osEx/1hQpVvZlhhMzlvvCuQ==",
+  "dgSpecHash": "bM9J2pP4AKx6/m+sh87hndDI9p670yS90cwIEPRDtmz846f+FI7ruTehimhMhX1CE+d4Wf1OdZu/avfprp1y1A==",
   "success": true,
   "projectFilePath": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.API\\Shop.API.csproj",
   "expectedPackageFiles": [

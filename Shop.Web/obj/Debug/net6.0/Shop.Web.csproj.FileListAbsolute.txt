@@ -29,3 +29,8 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.pdb
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.genruntimeconfig.cache
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\ref\Shop.Web.dll
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\bin\Debug\net6.0\Shop.DataModels.dll
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\bin\Debug\net6.0\Shop.DataModels.pdb
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.csproj.AssemblyReference.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.sourcelink.json
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.csproj.CopyComplete

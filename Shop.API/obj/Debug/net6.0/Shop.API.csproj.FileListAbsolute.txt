@@ -30,3 +30,8 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\obj\Debug\net6
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\obj\Debug\net6.0\Shop.API.pdb
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\obj\Debug\net6.0\Shop.API.genruntimeconfig.cache
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\obj\Debug\net6.0\ref\Shop.API.dll
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\bin\Debug\net6.0\Shop.DataModels.dll
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\bin\Debug\net6.0\Shop.Logic.dll
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\bin\Debug\net6.0\Shop.DataModels.pdb
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\bin\Debug\net6.0\Shop.Logic.pdb
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.API\obj\Debug\net6.0\Shop.API.sourcelink.json

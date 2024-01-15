@@ -1,12 +1,14 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inherits LayoutComponentBase
 
 @inject NavigationManager navManager;
+@inject ProtectedSessionStorage sessionStorage;
 
 <PageTitle>Shop.Admin</PageTitle>
 
 <div class="page">
 
-    @if (isAdminLoggedIn)
+    @if (IsAdminLoggedIn)
     {
         <div class="sidebar">
             <NavMenu />
@@ -14,7 +16,7 @@
     }
 
     <main>
-        @if (isAdminLoggedIn)
+        @if (IsAdminLoggedIn)
         {
             <div class="top-row px-4">
                 <a href="#" @onclick="Logout">Logout</a>
@@ -22,18 +24,36 @@
         }
 
         <article class="content px-4">
+            <CascadingValue Value="event_notify">
             @Body
+            </CascadingValue>
         </article>
     </main>
 </div>
 
-
-@code 
+@code
 {
-    public bool isAdminLoggedIn = false;
+    public bool IsAdminLoggedIn = false;
+
+    EventCallback event_notify => EventCallback.Factory.Create(this,NotifyLayout);
 
     public void Logout()
     {
         navManager.NavigateTo("/login");
     }
+
+    public async Task NotifyLayout()
+    {
+        var adminSession = await sessionStorage.GetAsync<string>("adminKey");
+        if(adminSession.Success) 
+        {
+            IsAdminLoggedIn = true;
+        }
+        else
+        {
+            IsAdminLoggedIn = false;
+            navManager.NavigateTo("/login");
+        }
+    }
+
 }

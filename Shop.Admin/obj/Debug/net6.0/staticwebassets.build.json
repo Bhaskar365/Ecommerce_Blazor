@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jQgTPg96u466eNqCyErq4dPCOlYMyqTCkChD739pHAo=",
+  "Hash": "GlkjnS/6qZdw39KdgMX8DCq9WbC2rkrdQ7WhMuHTHPs=",
   "Source": "Shop.Admin",
   "BasePath": "_content/Shop.Admin",
   "Mode": "Default",
@@ -300,6 +300,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\bdas\\.nuget\\packages\\microsoft.aspnetcore.protectedbrowserstorage\\0.1.0-alpha.19521.1\\staticwebassets\\protectedBrowserStorage.js",
+      "SourceId": "Microsoft.AspNetCore.ProtectedBrowserStorage",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\bdas\\.nuget\\packages\\microsoft.aspnetcore.protectedbrowserstorage\\0.1.0-alpha.19521.1\\staticwebassets\\",
+      "BasePath": "_content/Microsoft.AspNetCore.ProtectedBrowserStorage",
+      "RelativePath": "protectedBrowserStorage.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\bdas\\.nuget\\packages\\microsoft.aspnetcore.protectedbrowserstorage\\0.1.0-alpha.19521.1\\staticwebassets\\protectedBrowserStorage.js"
     }
   ]
 }

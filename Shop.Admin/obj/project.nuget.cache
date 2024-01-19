@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JVco+DCh72W82zhClNenCw+O56kkbHLev1959wBFK+78FQMlfdDi6+FznFTWeuK26MC2bYin5NIWqIN/5AB65A==",
+  "dgSpecHash": "Co3AXbiPxpmYrgPuc9NiB29BdU5P0sh91TPzGvfWPNg1ToUv9EMd9RRk67vnEDirIlPQgAAYp8w8iVVNAEasYA==",
   "success": true,
   "projectFilePath": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Admin\\Shop.Admin.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\bdas\\.nuget\\packages\\microsoft.aspnetcore.protectedbrowserstorage\\0.1.0-alpha.19521.1\\microsoft.aspnetcore.protectedbrowserstorage.0.1.0-alpha.19521.1.nupkg.sha512",
     "C:\\Users\\bdas\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\bdas\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\bdas\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddProtectedBrowserStorage();
 builder.Services.AddHttpClient<IAdminPanelService,AdminPanelService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5151/");

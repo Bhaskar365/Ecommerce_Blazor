@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+
 @inherits LayoutComponentBase
 
 @inject NavigationManager navManager;
@@ -37,8 +38,10 @@
 
     EventCallback event_notify => EventCallback.Factory.Create(this,NotifyLayout);
 
-    public void Logout()
+    public async void Logout()
     {
+        await sessionStorage.DeleteAsync("adminKey");
+        await NotifyLayout();
         navManager.NavigateTo("/login");
     }
 
@@ -55,5 +58,4 @@
             navManager.NavigateTo("/login");
         }
     }
-
 }

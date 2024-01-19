@@ -8,10 +8,19 @@
     ".NETCoreApp,Version=v6.0": {
       "Shop.Admin/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.ProtectedBrowserStorage": "0.1.0-alpha.19521.1",
           "Shop.DataModels": "1.0.0"
         },
         "runtime": {
           "Shop.Admin.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.ProtectedBrowserStorage/0.1.0-alpha.19521.1": {
+        "runtime": {
+          "lib/netcoreapp3.0/Microsoft.AspNetCore.ProtectedBrowserStorage.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.100.19.52101"
+          }
         }
       },
       "Microsoft.CSharp/4.5.0": {},
@@ -416,6 +425,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.AspNetCore.ProtectedBrowserStorage/0.1.0-alpha.19521.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-P81qtHhl6KXr+TCm5qfCxkhFxkGtALmY3bNcraKX6rPGMbPMBGi9mIeCyUZVmpzIVkD1ocUfuRqiob05jR3hUA==",
+      "path": "microsoft.aspnetcore.protectedbrowserstorage/0.1.0-alpha.19521.1",
+      "hashPath": "microsoft.aspnetcore.protectedbrowserstorage.0.1.0-alpha.19521.1.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

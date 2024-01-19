@@ -1,12 +1,13 @@
 ﻿@page "/login"
 
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 @using Shop.Admin.Services
 @using Shop.DataModels.CustomModels;
 
 @inject IAdminPanelService adminPanelService;
 @inject NavigationManager navManager;
-@inject ProtectedBrowserStorage sessionStorage;
+@inject ProtectedSessionStorage sessionStorage;
 
 <style>
     .loginBox {
@@ -99,7 +100,6 @@
     public EventCallback notify { get; set; }
 
     public LoginModel? loginModel { get; set; }
-
     public string? alertMessage { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -126,5 +126,5 @@
         }
     }
 
-
+    
 }

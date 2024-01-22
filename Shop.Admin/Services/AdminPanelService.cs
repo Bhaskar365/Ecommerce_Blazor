@@ -12,14 +12,21 @@ namespace Shop.Admin.Services
             this.httpClient = _httpClient;
         }
         public async Task<ResponseModel> AdminLogin(LoginModel loginModel)
-        {
-            //return await httpClient.PostAsJsonAsync<ResponseModel>("api/admin/AdminLogin", loginModel);
-            
+        { 
             HttpResponseMessage response = await httpClient.PostAsJsonAsync<LoginModel>("api/admin/AdminLogin", loginModel);
             ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
             
             return result;
+        }
 
+        public async Task<CategoryModel> SaveCategory(CategoryModel newCategory) 
+        {
+            //return await httpClient.postasjsonasync<CategoryModel>("api/admin/SaveCategory", newCategory);
+
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/SaveCategory", newCategory);
+            CategoryModel result = await response.Content.ReadFromJsonAsync<CategoryModel>();
+
+            return result;
         }
     }
 }

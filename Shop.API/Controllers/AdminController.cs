@@ -25,5 +25,13 @@ namespace Shop.API.Controllers
             var data = _adminService.AdminLogin(loginModel);
             return Ok(data);
         }
+
+        [HttpPost]
+        [Route("SaveCategory")]
+        public IActionResult SaveCategory(CategoryModel newCategory)
+        {
+            var data = _adminService.SaveCategory(newCategory);
+            return Ok(data);
+        }
     }
 }

@@ -51,5 +51,10 @@ namespace Shop.Logic.Services
                 return response;
             }
         }
+        public CategoryModel SaveCategory(CategoryModel newCategory)
+        {
+            return newCategory;
+        }
+
     }
 }

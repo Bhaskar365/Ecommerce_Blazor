@@ -1,11 +1,79 @@
 ﻿@page "/category"
+@using Shop.Admin.Services
+@using Shop.DataModels.CustomModels
+@inject IAdminPanelService adminPanelService; 
 
-<h3>Category</h3>
+@if (categoryModel == null)
+{
+    <p><em>Loading.....</em></p>
+}
+else
+{
+    <div card="card">
+        <h4 class="card-header">Category</h4>
+
+        <div class="card-body">
+            <EditForm Model="@categoryModel" OnValidSubmit="SaveCategory">
+                <DataAnnotationsValidator />
+                <div class="form-row">
+                    <div class="form-group col-5">
+                        <label>Name :</label>
+                        <InputText @bind-Value="categoryModel.Name" class="form-control" />
+                        <ValidationMessage For="@(()=> categoryModel.Name)"></ValidationMessage>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="button" class="btn btn-secondary" value="Clear" @onclick="ClearForm" />
+                </div>
+            </EditForm>
+        </div>
+
+        <div class="card-body bg-dark">
+            @if (categoryList == null)
+            {
+                <p><em>Loading.....</em></p>
+            }
+            else
+            {
+                <table class="table table-striped table-bordered bg-light">
+                    <thead>
+                        <tr>
+                            <th style="width:15px;">Sr. No.</th>
+                            <th>Category Name</th>
+                            <th style="width:80px;">Edit?</th>
+                            <th style="width:80px;">Delete?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var (index, cat) in categoryList.Select((cat,i) => (i+1, cat)))
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@cat.name</td>
+                                <td><input type="button" class="btn btn-primary" value="Edit" @onclick="(()=> EditButtonClick(cat))" /></td>
+                                <td><input type="button" class="btn btn-danger" value="Delete" @onclick="(()=> DeleteButtonClick(cat))" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+    </div>
+}
 
 @code {
 
     [CascadingParameter]
     public EventCallback notify { get; set; }
+
+    public CategoryModel categoryModel { get; set; }
+
+    private async Task SaveCategory()
+    {
+        await adminPanelService.SaveCategory(categoryModel);
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

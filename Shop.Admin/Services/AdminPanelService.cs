@@ -28,5 +28,32 @@ namespace Shop.Admin.Services
 
             return result;
         }
+
+        public async Task<List<CategoryModel>> GetCategories() 
+        {
+            return await httpClient.GetFromJsonAsync<List<CategoryModel>>("api/admin/GetCategories");    
+        }
+
+        public async Task<bool> UpdateCategory(CategoryModel categoryToUpdate) 
+        {
+            HttpResponseMessage response =  await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/UpdateCategory", categoryToUpdate);
+            return response.IsSuccessStatusCode;
+            // if (response.IsSuccessStatusCode) 
+            // {
+            //     return true;
+            // }
+            //return false;
+        }
+
+        public async Task<bool> DeleteCategory(CategoryModel categoryModel) 
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/DeleteCategory", categoryModel);
+            return response.IsSuccessStatusCode;
+            //if (response.IsSuccessStatusCode) 
+            //{
+            //    return true;
+            //}
+            //return false;
+        }
     }
 }

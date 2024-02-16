@@ -16,7 +16,7 @@ else
         <div class="card-body">
             <EditForm Model="@productModel" OnValidSubmit="SaveProduct">
                 <DataAnnotationsValidator />
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-3">
                         <label>Name :</label>
                         <InputText @bind-Value="productModel.Name" class="form-control" />
@@ -74,7 +74,14 @@ else
             </EditForm>
         </div>
         <div class="card-body">
-
+            @if (productList == null)
+            {
+                <p><em>Loading.....</em></p>
+            }
+            else
+            {
+                    
+            }
         </div>
     </div>
 }
@@ -101,7 +108,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        productModel = new ProductModel();
         await GetCategories();
+        await GetProducts();
     }
 
     private async Task GetCategories()
@@ -109,9 +118,47 @@ else
         categoryList = await adminPanelService.GetCategories();
     }
 
+    private async Task GetProducts()
+    {
+        productList = await adminPanelService.GetProducts();
+    }
+
     private async Task SaveProduct()
     {
-        
+
+    }
+
+    private void CategoryClicked(ChangeEventArgs categoryEvent)
+    {
+        if (!string.IsNullOrEmpty(Convert.ToString(categoryEvent.Value)))
+        {
+            categoryId = Convert.ToInt32(categoryEvent.Value);
+            productModel.CategoryId = categoryId;
+            this.StateHasChanged();
+        }
+    }
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFiles = e.GetMultipleFiles();
+        productModel.FileName = string.Empty;
+        foreach(var imageFile in selectedFiles)
+        {
+            var resizedImage = await imageFile.RequestImageFileAsync("image/jpg", 100, 100);
+            var buffer = new byte[resizedImage.Size];
+            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            var imgData = $"data:image/jpg;base64, {Convert.ToBase64String(buffer)}";
+            imageUrls.Add(imgData);
+            productModel.FileName = imgData;
+        }
+        Message = $"{selectedFiles.Count} file(s) selected";
+        this.StateHasChanged();
+    }
+
+    private void ClearForm()
+    {
+        productModel = new ProductModel();
+        imageUrls = new List<string>();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

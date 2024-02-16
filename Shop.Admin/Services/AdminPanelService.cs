@@ -34,6 +34,11 @@ namespace Shop.Admin.Services
             return await httpClient.GetFromJsonAsync<List<CategoryModel>>("api/admin/GetCategories");    
         }
 
+        public async Task<List<ProductModel>> GetProducts() 
+        {
+            return await httpClient.GetFromJsonAsync<List<ProductModel>>("api/admin/GetProducts");
+        }
+
         public async Task<bool> UpdateCategory(CategoryModel categoryToUpdate) 
         {
             HttpResponseMessage response =  await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/UpdateCategory", categoryToUpdate);

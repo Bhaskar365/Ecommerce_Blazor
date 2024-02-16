@@ -9,5 +9,6 @@ namespace Shop.Admin.Services
         Task<List<CategoryModel>> GetCategories();
         Task<bool> UpdateCategory(CategoryModel categoryToUpdate);
         Task<bool> DeleteCategory(CategoryModel categoryModel);
+        Task<List<ProductModel>> GetProducts();
     }
 }

@@ -38,22 +38,12 @@ namespace Shop.Admin.Services
         {
             HttpResponseMessage response =  await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/UpdateCategory", categoryToUpdate);
             return response.IsSuccessStatusCode;
-            // if (response.IsSuccessStatusCode) 
-            // {
-            //     return true;
-            // }
-            //return false;
         }
 
         public async Task<bool> DeleteCategory(CategoryModel categoryModel) 
         {
             HttpResponseMessage response = await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/DeleteCategory", categoryModel);
             return response.IsSuccessStatusCode;
-            //if (response.IsSuccessStatusCode) 
-            //{
-            //    return true;
-            //}
-            //return false;
         }
     }
 }

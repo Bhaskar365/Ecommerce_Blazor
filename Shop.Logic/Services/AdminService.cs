@@ -82,8 +82,6 @@ namespace Shop.Logic.Services
         }
         public bool UpdateCategory(CategoryModel categoryToUpdate)
         {
-            //try
-            //{
                 bool flag = false;
                 var _category = _context.Categories.Where(x => x.Id == categoryToUpdate.Id).First();
                 if (_category != null)
@@ -94,11 +92,6 @@ namespace Shop.Logic.Services
                     flag = true;
                 }
                 return flag;
-           //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
         }
 
         public bool DeleteCategory(CategoryModel categoryToDelete) 

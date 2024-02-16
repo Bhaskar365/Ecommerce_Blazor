@@ -80,7 +80,33 @@ else
             }
             else
             {
-                    
+                <table class="table table-striped table-bordered bg-light">
+                    <thead>
+                        <tr>
+                            <th style="width:15px;">Sr. No.</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Category</th>
+                            @* <th style="width:80px;">Edit?</th> *@
+                            <th style="width:80px;">Delete?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var (index, prod) in productList.Select((prod, i) => (i + 1, prod)))
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@prod.Name</td>
+                                <td>@prod.Price</td>
+                                <td>@prod.Stock</td>
+                                <td>@prod.CategoryName</td>
+                                @* <td><input type="button" class="btn btn-primary" value="Edit" @onclick="(()=>EditButtonClick(prod))" /></td> *@
+                                <td><input type="button" class="btn btn-primary" value="Delete" @onclick="(()=>DeleteButtonClick(prod))" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
         </div>
     </div>
@@ -128,6 +154,17 @@ else
 
     }
 
+    private void DeleteButtonClick(ProductModel _productToDelete)
+    {
+        productToDelete = _productToDelete;
+        ToggleDeletePopup();
+    }
+
+    private void ToggleDeletePopup()
+    {
+        showDeletePopup = showDeletePopup == true ? false : true;    
+    }
+
     private void CategoryClicked(ChangeEventArgs categoryEvent)
     {
         if (!string.IsNullOrEmpty(Convert.ToString(categoryEvent.Value)))
@@ -142,7 +179,7 @@ else
     {
         selectedFiles = e.GetMultipleFiles();
         productModel.FileName = string.Empty;
-        foreach(var imageFile in selectedFiles)
+        foreach (var imageFile in selectedFiles)
         {
             var resizedImage = await imageFile.RequestImageFileAsync("image/jpg", 100, 100);
             var buffer = new byte[resizedImage.Size];

@@ -112,6 +112,40 @@ else
     </div>
 }
 
+@if(showDeletePopup == true)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Delete Product</h5>
+                <span class="close" @onclick="ToggleDeletePopup">&times;</span>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to Delete <span style="background-color:yellow;">@productToDelete</span>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-danger" value="Yes" @onclick="DeleteProduct" />
+                <input type="button" class="btn btn-primary" value="No" @onclick="ToggleDeletePopup" />
+            </div>
+        </div>
+    </div>
+}
+
+@if(successPopup == true)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Alert <span class="close" @onclick="ToggleSuccessPopup">&times;</span>
+            </div>
+            <div class="modal-body">@Message</div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary" value="Close" @onclick="ToggleSuccessPopup" />
+            </div>
+        </div>
+    </div>
+}
+
 @code {
 
     [CascadingParameter]
@@ -151,7 +185,38 @@ else
 
     private async Task SaveProduct()
     {
+        Stream stream = selectedFiles.FirstOrDefault().OpenReadStream();
+        MemoryStream ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        stream.Close();
 
+        productModel.CategoryId = categoryId;
+        productModel.FileName = selectedFiles.FirstOrDefault().Name;
+        productModel.FileContent = ms.ToArray();
+        ms.Close();
+
+        await adminPanelService.SaveProduct(productModel);
+        await GetProducts();
+        ClearForm();
+    }
+
+    private async Task DeleteProduct()
+    {
+        productToDelete.FileName = "demofile";
+        bool flag = await adminPanelService.DeleteProduct(productToDelete);
+        ToggleDeletePopup();
+        if(flag)
+        {
+            Message = "Product Deleted Successfully";
+        }
+        else
+        {
+            Message = "Product not deleted, try again!";
+        }
+
+        ToggleSuccessPopup();
+        productToDelete = new ProductModel();
+        await GetProducts();
     }
 
     private void DeleteButtonClick(ProductModel _productToDelete)
@@ -163,6 +228,11 @@ else
     private void ToggleDeletePopup()
     {
         showDeletePopup = showDeletePopup == true ? false : true;    
+    }
+
+    private void ToggleSuccessPopup()
+    {
+        successPopup = successPopup == true ? false : true;
     }
 
     private void CategoryClicked(ChangeEventArgs categoryEvent)

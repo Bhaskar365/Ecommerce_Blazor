@@ -44,11 +44,22 @@ namespace Shop.Admin.Services
             HttpResponseMessage response =  await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/UpdateCategory", categoryToUpdate);
             return response.IsSuccessStatusCode;
         }
-
-        public async Task<bool> DeleteCategory(CategoryModel categoryModel) 
+        public async Task<bool> DeleteCategory(CategoryModel categoryToDelete) 
         {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/DeleteCategory", categoryModel);
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync<CategoryModel>("api/admin/DeleteCategory", categoryToDelete);
             return response.IsSuccessStatusCode;
+        }
+        //product service
+        public async Task<bool> DeleteProduct(ProductModel productToDelete)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync<ProductModel>("api/admin/DeleteProduct", productToDelete);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<ProductModel> SaveProduct(ProductModel newProduct) 
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync<ProductModel>("api/admin/SaveProduct", newProduct);
+            ProductModel result = await response.Content.ReadFromJsonAsync<ProductModel>();
+            return result;
         }
     }
 }

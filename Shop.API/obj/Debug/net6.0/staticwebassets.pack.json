@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.API\\wwwroot\\Images\\0.png",
+      "PackagePath": "staticwebassets\\Images\\0.png"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Shop.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.Shop.API.props",
+      "PackagePath": "build\\Shop.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.Shop.API.props",
+      "PackagePath": "buildMultiTargeting\\Shop.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.Shop.API.props",
+      "PackagePath": "buildTransitive\\Shop.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

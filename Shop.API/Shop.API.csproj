@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Shop.Logic\Shop.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

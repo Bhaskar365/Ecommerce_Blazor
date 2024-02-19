@@ -106,5 +106,69 @@ namespace Shop.Logic.Services
             }
             return flag;
         }
+
+        //product methods
+        public List<ProductModel> GetProducts() 
+        {
+            List<Category> categoryData = _context.Categories.ToList();
+            List<Product> productData = _context.Products.ToList();
+            List<ProductModel> _productList = new List<ProductModel>();
+            foreach(var p in productData) 
+            {
+                ProductModel _productModel = new ProductModel();
+                _productModel.Id = p.Id;
+                _productModel.Name = p.Name;
+                _productModel.Price = p.Price;
+                _productModel.Stock = p.Stock;
+                _productModel.ImageUrl = p.ImageUrl; 
+                _productModel.CategoryName = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Name).FirstOrDefault();
+                _productList.Add(_productModel);
+            }
+            return _productList;
+        }
+        public bool DeleteProduct(ProductModel productToDelete) 
+        {
+            bool flag = false;
+            var _product = _context.Products.Where(x => x.Id == productToDelete.Id).First();
+            if(_product != null) 
+            {
+                _context.Products.Remove(_product);
+                _context.SaveChanges();
+                flag = true;
+            }
+            return flag;
+        }
+
+        public int GetNewProductId() 
+        {
+            try 
+            {
+                int nextProductId = _context.Products.ToList().OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault();
+                return nextProductId;
+            }
+            catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
+        public ProductModel SaveProduct(ProductModel newProduct) 
+        {
+            try 
+            {
+                Product _product = new Product();
+                _product.Name = newProduct.Name;
+                _product.Price = newProduct.Price;
+                _product.ImageUrl = newProduct.ImageUrl;
+                _product.CategoryId = newProduct.CategoryId;
+                _product.Stock = newProduct.Stock;
+                _context.Add(_product);
+                _context.SaveChanges();
+                return newProduct;
+            }
+            catch (Exception ex) 
+            {
+                throw ex;
+            }
+        }
     }
 }

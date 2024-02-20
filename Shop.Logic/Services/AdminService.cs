@@ -120,7 +120,8 @@ namespace Shop.Logic.Services
                 _productModel.Name = p.Name;
                 _productModel.Price = p.Price;
                 _productModel.Stock = p.Stock;
-                _productModel.ImageUrl = p.ImageUrl; 
+                _productModel.ImageUrl = p.ImageUrl;
+                _productModel.CategoryId = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Id).FirstOrDefault();
                 _productModel.CategoryName = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Name).FirstOrDefault();
                 _productList.Add(_productModel);
             }
@@ -169,6 +170,15 @@ namespace Shop.Logic.Services
             {
                 throw ex;
             }
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            return _context.Categories.Where(p => p.Id == id).FirstOrDefault();
+            //Category _category = new Category();
+            //var IDSearch = 
+            //var ID = _context.Categories.Where(p => p.Id == id).FirstOrDefault();
+            //return ID;
         }
     }
 }

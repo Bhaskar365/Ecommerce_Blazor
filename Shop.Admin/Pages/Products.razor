@@ -161,7 +161,7 @@ else
                 <span class="close" @onclick="ToggleDeletePopup">&times;</span>
             </div>
             <div class="modal-body">
-                Are you sure you want to Delete <span style="background-color:yellow;">@productToDelete</span>
+                Are you sure you want to Delete <span style="background-color:yellow;">@productToDelete.Name</span>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-danger" value="Yes" @onclick="DeleteProduct" />
@@ -195,6 +195,7 @@ else
 
     public ProductModel? productModel { get; set; }
     public List<ProductModel>? productList { get; set; }
+    ProductModel? productListById { get; set; }
 
     public int categoryId { get; set; }
     IReadOnlyList<IBrowserFile>? selectedFiles;
@@ -210,6 +211,7 @@ else
     {
         productModel = new ProductModel();
         await GetCategories();
+
         await GetProducts();
     }
 
@@ -259,7 +261,7 @@ else
         await GetProducts();
     }
 
-    private void DeleteButtonClick(ProductModel _productToDelete)
+    private async void DeleteButtonClick(ProductModel _productToDelete)
     {
         productToDelete = _productToDelete;
         ToggleDeletePopup();

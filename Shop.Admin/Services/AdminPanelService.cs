@@ -52,7 +52,7 @@ namespace Shop.Admin.Services
         //product service
         public async Task<bool> DeleteProduct(ProductModel productToDelete)
         {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync<ProductModel>("api/admin/DeleteProduct", productToDelete);
+            var response = await httpClient.PostAsJsonAsync<ProductModel>("api/admin/DeleteProduct", productToDelete);
             return response.IsSuccessStatusCode;
         }
         public async Task<ProductModel> SaveProduct(ProductModel newProduct) 

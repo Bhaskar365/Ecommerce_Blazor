@@ -1,4 +1,5 @@
 ﻿using Shop.DataModels.CustomModels;
+using Shop.DataModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Shop.Logic.Services
         List<CategoryModel> GetCategories();
         bool UpdateCategory(CategoryModel categoryToUpdate);
         bool DeleteCategory(CategoryModel categoryToDelete);
+        Category GetCategoryById(int id);
 
         //product service
         List<ProductModel> GetProducts();

@@ -15,6 +15,6 @@ namespace Shop.Admin.Services
         Task<bool> DeleteProduct(ProductModel productToDelete);
         Task<ProductModel> SaveProduct(ProductModel newProduct);
         Task<List<StockModel>> GetProductStock();
-        Task<StockModel> AddProductStock(StockModel stock);
+        Task<bool> UpdateProductStock(StockModel stock); 
     }
 }

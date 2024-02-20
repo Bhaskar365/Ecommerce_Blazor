@@ -171,5 +171,36 @@ namespace Shop.Logic.Services
                 throw ex;
             }
         }
+        public List<StockModel> GetProductStock() 
+        {
+            List<StockModel> productStock = new List<StockModel>();
+
+            List<Category> categoryData = _context.Categories.ToList();
+            List <Product> productData = _context.Products.ToList();
+
+            foreach (var p in productData) 
+            {
+                StockModel _productModel = new StockModel();
+                _productModel.Id = p.Id;
+                _productModel.Name = p.Name;
+                _productModel.Stock = (int)p.Stock;
+                _productModel.CategoryName = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Name).FirstOrDefault();
+                productStock.Add(_productModel);
+            }
+            return productStock;
+        }
+        public bool UpdateProductStock(StockModel stock) 
+        {
+            bool flag = false;
+            var _product = _context.Products.Where(x => x.Id == stock.Id).First();
+            if(_product != null) 
+            {
+                _product.Stock = stock.Stock + stock.NewStock;
+                _context.Products.Update(_product);
+                _context.SaveChanges();
+                flag = true;
+            }
+            return flag;
+        }
     }
 }

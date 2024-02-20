@@ -66,10 +66,10 @@ namespace Shop.Admin.Services
         {
             return await httpClient.GetFromJsonAsync<List<StockModel>>("api/admin/GetProductStock");    
         }
-        public async Task<StockModel> AddProductStock(StockModel stock) 
+        public async Task<bool> UpdateProductStock(StockModel stock) 
         {
-            var response =  await httpClient.PostAsJsonAsync<StockModel>("api/admin/AddProductStock", stock);
-            StockModel result = await response.Content.ReadFromJsonAsync<StockModel>();
+            var response =  await httpClient.PostAsJsonAsync<StockModel>("api/admin/UpdateProductStock", stock);
+            bool result = await response.Content.ReadFromJsonAsync<bool>();
             return result;
         }
     }

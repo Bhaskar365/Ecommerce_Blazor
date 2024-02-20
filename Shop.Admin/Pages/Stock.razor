@@ -151,6 +151,11 @@
     public List<StockModel> stockList { get; set; }
     public StockModel stockToUpdate = null;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await getProductStock();
+    }
+
     private void ToggleSuccessPopup()
     {
         successPopup = successPopup == true ? false : true;

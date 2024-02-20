@@ -171,14 +171,5 @@ namespace Shop.Logic.Services
                 throw ex;
             }
         }
-
-        public Category GetCategoryById(int id)
-        {
-            return _context.Categories.Where(p => p.Id == id).FirstOrDefault();
-            //Category _category = new Category();
-            //var IDSearch = 
-            //var ID = _context.Categories.Where(p => p.Id == id).FirstOrDefault();
-            //return ID;
-        }
     }
 }

@@ -61,5 +61,16 @@ namespace Shop.Admin.Services
             ProductModel result = await response.Content.ReadFromJsonAsync<ProductModel>();
             return result;
         }
+
+        public async Task<List<StockModel>> GetProductStock() 
+        {
+            return await httpClient.GetFromJsonAsync<List<StockModel>>("api/admin/GetProductStock");    
+        }
+        public async Task<StockModel> AddProductStock(StockModel stock) 
+        {
+            var response =  await httpClient.PostAsJsonAsync<StockModel>("api/admin/AddProductStock", stock);
+            StockModel result = await response.Content.ReadFromJsonAsync<StockModel>();
+            return result;
+        }
     }
 }

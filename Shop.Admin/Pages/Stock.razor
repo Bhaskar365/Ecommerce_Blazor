@@ -161,6 +161,12 @@
         showAddPopup = showAddPopup == true ? false : true;
     }
 
+    private void AddButtonClick(StockModel _stock)
+    {
+        stockToUpdate = _stock;
+        ToggleAddPopup();
+    }
+
     private async Task UpdateButtonClick()
     {
         bool flag = await adminPanelService.UpdateProductStock(stockToUpdate);

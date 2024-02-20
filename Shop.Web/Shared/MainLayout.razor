@@ -1,20 +1,46 @@
 ﻿@inherits LayoutComponentBase
 
 <style>
+    .mainLayout {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 10px;
+    }
 
+    * {
+        box-sizing: border-box;
+    }
+
+    .header {
+        color: black;
+        padding: 5px;
+        border: 1px groove #808080;
+        border-radius: 14px;
+        background: linear-gradient(-45deg, #ffd800, #808080, #23a6d5, #f5f542);
+        background-size: 400% 400%;
+    }
+
+    .footer {
+        color: black;
+        padding: 5px;
+        border: 1px groove #808080;
+        border-radius: 7px;
+        background: linear-gradient(-45deg, #ffd800, #808080, #23a6d5, #f5f542);
+        background-size: 400% 400%;
+    }
 </style>
 
 <PageTitle>Shop.Web</PageTitle>
 
-<div>
- 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+<div class="mainLayout">
+    <div class="header">
+        Welcome to Shopping Page
+    </div>
+    <article>
+        @Body
+    </article>
+    <div class="footer">
+        &copy; Shopping Cart Example 
+    </div>
 </div>

@@ -56,7 +56,6 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Shop.Web.props
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\scopedcss\bundle\Shop.Web.styles.css
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\scopedcss\projectbundle\Shop.Web.bundle.scp.css
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Web\obj\Debug\net6.0\Shop.Web.csproj.CopyComplete

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Shop.DataModels\Shop.DataModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

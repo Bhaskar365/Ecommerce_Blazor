@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Xax07CqLNcDgbmF8atgvs//pS1XE/4llbSjWzTtjM3k=",
+  "Hash": "yiZr2B3grk4Od5TV7rE1vdxvPQfHP1s6p6bBREXlUCs=",
   "Source": "Shop.Web",
   "BasePath": "_content/Shop.Web",
   "Mode": "Default",
@@ -300,6 +300,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\shopee-logo-31405.png",
+      "SourceId": "Shop.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\",
+      "BasePath": "_content/Shop.Web",
+      "RelativePath": "images/shopee-logo-31405.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\shopee-logo-31405.png"
+    },
+    {
+      "Identity": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\shopping-cart-20367.png",
+      "SourceId": "Shop.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\",
+      "BasePath": "_content/Shop.Web",
+      "RelativePath": "images/shopping-cart-20367.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\shopping-cart-20367.png"
     }
   ]
 }

@@ -29,18 +29,120 @@
         background: linear-gradient(-45deg, #ffd800, #808080, #23a6d5, #f5f542);
         background-size: 400% 400%;
     }
+
+    .col-container {
+        border:2px solid blue;
+        display: table;
+        width: 100%;
+        border-radius: 25px;
+    }
+
+    .col {
+        display: table-cell;
+        padding: 16px;
+    }
+
+    .divleft {
+        float: left;
+    }
+
+    .divright {
+        float: right;
+    }
+
 </style>
 
 <PageTitle>Shop.Web</PageTitle>
 
 <div class="mainLayout">
+    <div>
+        <div class="divleft" style="padding-right:15px;">
+            <NavLink href="/">
+                Home
+            </NavLink>
+        </div>
+        <div class="divleft">
+            @if (IsUserLoggedIn)
+            {
+                <i class="fa fa-user"></i><span>Welcome, @LoggedInUserName</span>
+            }
+            else
+            {
+                 <i class="fa fa-user"></i><span>Welcome</span>   
+            }
+        </div>
+        <div class="divright">
+            @if(IsUserLoggedIn)
+            {
+               <div style="padding-left:15px;">
+                    <i class="fa fa-sign-out"></i> <a @onclick="@Logout" href="#">Logout</a>
+               </div>
+            }
+        </div>
+        <div class="divright" style="padding-left:15px;">
+            @if(IsUserLoggedIn)
+            {
+                <NavLink href="myaccount">
+                    MyAccount
+                </NavLink>
+            }
+        </div>
+        <div class="divright" style="padding-left:15px;">
+            @if(!IsUserLoggedIn)
+            {
+                <NavLink href="login">
+                    Login
+                </NavLink>    
+            }
+        </div>
+        <div class="divright" style="padding-left:15px;">
+            @if(!IsUserLoggedIn)
+            {
+                <NavLink href="register">
+                    Register
+                </NavLink>    
+            }
+        </div>
+    </div>
+
     <div class="header">
+        <div class="col-container ">
+            <div class="col" style="border-radius:25px;">
+                <NavLink href="/">
+                    <img src="images/shopee-logo-31405.png" style="cursor:pointer;width:50px;height:50px;" />
+                </NavLink>
+            </div>
+            <div class="col">
+                <a href="/mycart">
+                    <i class="fa fa-shopping-cart" style="font-size:48px;color:black;float: right" aria-hidden="true">
+                        <span style="font-size:35px;vertical-align:top;;
+                            padding:7px;color:black;border-radius:50%;padding-top:10px;font-weight:bold">
+                            <sup>@cartCount</sup>
+                        </span>
+                    </i>
+                </a>
+
+            </div>
+        </div>
+
         Welcome to Shopping Page
     </div>
     <article>
         @Body
     </article>
     <div class="footer">
-        &copy; Shopping Cart Example 
+        &copy; Shopping Cart Example
     </div>
 </div>
+
+@code {
+
+    public int cartCount = 0;
+    public bool IsUserLoggedIn = false;
+    public string LoggedInUserName = "User";
+
+    private void Logout()
+    {
+            
+    }
+}

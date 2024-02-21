@@ -1,5 +1,12 @@
 ﻿@page "/"
 
+@using Shop.DataModels.CustomModels
+@using Shop.Web.Services
+
+@inject IUserPanelService userPanelService;
+@inject ProtectedSessionStorage sessionStorage;
+@inject NavigationManager navManager;
+
 <style>
 
     .column {
@@ -61,7 +68,22 @@
 <div style="min-height:500px;">
 
     <div class="column menu">
-
+        @if(categories == null)
+        {
+            <span>loading.......</span>
+        }
+        else
+        {
+            <div style="text-align:center;">
+                <h5>Shopping List</h5>
+            </div>
+            <ul>
+                @foreach(var category in categories)
+                {
+                    <li style="cursor:pointer;" @onclick="(()=> LoadProductByCategory(category))">@category.Name</li>
+                }
+            </ul>
+        }
     </div>
     <div class="column content">
 
@@ -72,6 +94,25 @@
 
 @code {
 
+    public List<CategoryModel> categories { get; set; }
+    public List<ProductModel> products { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCategories();    
+    }
 
-}
+    public async Task GetCategories()
+    {
+        categories = await userPanelService.GetCategories();
+        if(categories!=null && categories.Count>0)
+        {
+            await LoadProductByCategory(categories.FirstOrDefault());    
+        }
+    }
+
+    private async Task LoadProductByCategory(CategoryModel category)
+    {
+        
+    }
+ }

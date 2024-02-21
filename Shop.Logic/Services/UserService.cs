@@ -29,5 +29,23 @@ namespace Shop.Logic.Services
             }
             return _categoryList;
         }
+        public List<ProductModel> GetProductByCategoryId(int categoryId) 
+        {
+            var data = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
+            List<ProductModel> _productList = new List<ProductModel>();
+            foreach(var p in data) 
+            {
+                ProductModel _productModel = new ProductModel();
+                _productModel.Id = p.Id;
+                _productModel.Name = p.Name;
+                _productModel.Price = p.Price;
+                _productModel.ImageUrl = p.ImageUrl;
+                _productModel.Stock = p.Stock;
+                _productModel.CategoryId = p.Id;
+                _productList.Add(_productModel);
+            }
+            return _productList;
+        }
+
     }
 }

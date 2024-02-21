@@ -14,6 +14,9 @@ namespace Shop.Web.Services
         {
             return await httpClient.GetFromJsonAsync<List<CategoryModel>>("api/user/GetCategories");
         }
-
+        public async Task<List<ProductModel>> GetProductByCategoryId(int categoryId)
+        {
+            return await httpClient.GetFromJsonAsync<List<ProductModel>>("api/user/GetProductByCategoryId/?categoryId=" + categoryId);
+        }
     }
 }

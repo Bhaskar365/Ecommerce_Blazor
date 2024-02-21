@@ -21,5 +21,13 @@ namespace Shop.API.Controllers
             var data = _userService.GetCategories();
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("GetProductByCategoryId")]
+        public IActionResult GetProductByCategoryId(int categoryId) 
+        {
+            var data = _userService.GetProductByCategoryId(categoryId);
+            return Ok(data);
+        }
     }
 }

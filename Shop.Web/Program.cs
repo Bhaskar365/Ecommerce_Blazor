@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Shop.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IUserPanelService, UserPanelService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5151/");
+});
 
 var app = builder.Build();
 

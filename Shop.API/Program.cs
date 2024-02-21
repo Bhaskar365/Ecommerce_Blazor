@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ShoppingCartDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IUserService,UserService>();
 
 var app = builder.Build();
 

@@ -10,5 +10,6 @@ namespace Shop.Logic.Services
     public interface IUserService
     {
         List<CategoryModel> GetCategories();
+        List<ProductModel> GetProductByCategoryId(int categoryId);
     }
 }

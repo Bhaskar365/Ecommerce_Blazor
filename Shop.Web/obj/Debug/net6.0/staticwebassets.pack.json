@@ -57,6 +57,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\empty_cart.jpg",
+      "PackagePath": "staticwebassets\\images\\empty_cart.jpg"
+    },
+    {
       "Id": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\shopee-logo-31405.png",
       "PackagePath": "staticwebassets\\images\\shopee-logo-31405.png"
     },

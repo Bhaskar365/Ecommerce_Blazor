@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hGnHwyyiYhnw7v/gR19ZIOELt4KuHjhYP8a4KjThtmA=",
+  "Hash": "gfetLaMcZRnPNUpzbAMId80OPYC0rV3XBHeP0kwUuwg=",
   "Source": "Shop.API",
   "BasePath": "_content/Shop.API",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\1.png"
+    },
+    {
+      "Identity": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.API\\wwwroot\\Images\\empty_cart.jpg",
+      "SourceId": "Shop.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.API\\wwwroot\\",
+      "BasePath": "_content/Shop.API",
+      "RelativePath": "Images/empty_cart.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\empty_cart.jpg"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yiZr2B3grk4Od5TV7rE1vdxvPQfHP1s6p6bBREXlUCs=",
+  "Hash": "xlRZNAjfcNL4chZEhkLZvkSt1NtKgxKM3AOQFSRqxno=",
   "Source": "Shop.Web",
   "BasePath": "_content/Shop.Web",
   "Mode": "Default",
@@ -300,6 +300,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\empty_cart.jpg",
+      "SourceId": "Shop.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\",
+      "BasePath": "_content/Shop.Web",
+      "RelativePath": "images/empty_cart.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\empty_cart.jpg"
     },
     {
       "Identity": "C:\\Angular_RunningPrograms\\Blazor_Ecommerce\\ShoppingCart\\Shop.Web\\wwwroot\\images\\shopee-logo-31405.png",

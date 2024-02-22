@@ -59,8 +59,8 @@
     }
 
     .add-to-cart {
-        border:1px outset #808080;
-        width:100%;
+        border: 1px outset #808080;
+        width: 100%;
         background-color: #b6ff00;
     }
 </style>
@@ -68,7 +68,7 @@
 <div style="min-height:500px;">
 
     <div class="column menu">
-        @if(categories == null)
+        @if (categories == null)
         {
             <span>loading.......</span>
         }
@@ -78,7 +78,7 @@
                 <h5>Shopping List</h5>
             </div>
             <ul>
-                @foreach(var category in categories)
+                @foreach (var category in categories)
                 {
                     <li style="cursor:pointer;" @onclick="(()=> LoadProductByCategory(category))">@category.Name</li>
                 }
@@ -86,7 +86,7 @@
         }
     </div>
     <div class="column content">
-        @if(products == null)
+        @if (products == null)
         {
             <span>loading.....</span>
         }
@@ -97,7 +97,7 @@
                     <h5><i><u>@categoryName</u></i></h5>
                 </div>
                 <div class="row">
-                    @foreach(var prod in products)
+                    @foreach (var prod in products)
                     {
                         <div class="col-md-4">
                             <div class="col-md-12 stuff">
@@ -108,43 +108,52 @@
                                     <div>
                                         Price:&nbsp; &nbsp;&nbsp;<span style="color:red;">Stock:&nbsp;@prod.Stock</span>
                                     </div>
-                                    @if(@prod.CartFlag)
+                                    @if (@prod.CartFlag)
                                     {
-                                        <button type="button" class="btn add-to-cart" style="background-color:#ffd800;" @onclick="(()=> AddToCart_Click(prod))">Remove from Cart</button>
+                                        <button type="button"
+                                                class="btn add-to-cart"
+                                                style="background-color:#ffd800;"
+                                                @onclick="(()=> AddToCart_Click(prod))">
+                                            Remove from Cart
+                                        </button>
                                     }
                                     else
                                     {
-                                        <button type="button" class="btn add-to-cart" @onclick="(()=> AddToCart_Click(prod))">Add to Cart</button>
+                                        <button type="button"
+                                                class="btn add-to-cart"
+                                                @onclick="(()=> AddToCart_Click(prod))">
+                                            Add to Cart
+                                        </button>
                                     }
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     }
                 </div>
-            </div>    
+            </div>
         }
     </div>
-
-
 </div>
 
-@code {
-
+@code
+{
     public List<CategoryModel> categories { get; set; }
     public List<ProductModel> products { get; set; }
     public string categoryName = string.Empty;
+    public bool cartFlag = false;
+    public List<CartModel> myCart { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        await GetCategories();    
+        await GetCategories();
     }
 
     public async Task GetCategories()
     {
         categories = await userPanelService.GetCategories();
-        if(categories!=null && categories.Count>0)
+        if (categories != null && categories.Count > 0)
         {
-            await LoadProductByCategory(categories.FirstOrDefault());    
+            await LoadProductByCategory(categories.FirstOrDefault());
         }
     }
 
@@ -156,6 +165,88 @@
 
     private async Task AddToCart_Click(ProductModel productClicked)
     {
-            
+        cartFlag = true;
+        var result = await sessionStorage.GetAsync<List<CartModel>>("myCart");
+
+        if (!result.Success)
+        {
+            myCart = new List<CartModel>();
+
+            if (productClicked.CartFlag)
+            {
+                var existing_product = myCart.Where(x => x.ProductId == productClicked.Id).FirstOrDefault();
+                if (existing_product != null)
+                {
+                    myCart.Remove(existing_product);
+                    await sessionStorage.SetAsync("myCart", myCart);
+                }
+            }
+            else
+            {
+                CartModel cm = new CartModel();
+                cm.ProductId = productClicked.Id;
+                cm.Quantity = 1;
+                cm.AvailableStock = Convert.ToInt32(productClicked.Stock);
+                cm.ProductName = productClicked.Name;
+                cm.ProductImage = productClicked.ImageUrl;
+                cm.Price = Convert.ToInt32(productClicked.Price);
+                myCart.Add(cm);
+
+                await sessionStorage.SetAsync("myCart", myCart);
+            }
+        }
+        else
+        {
+            myCart = result.Value;
+
+            if (productClicked.CartFlag)
+            {
+                var existing_product = myCart.Where(x => x.ProductId == productClicked.Id).FirstOrDefault();
+                if (existing_product != null)
+                {
+                    myCart.Remove(existing_product);
+                    await sessionStorage.SetAsync("myCart", myCart);
+                }
+            }
+            else
+            {
+                CartModel cm = new CartModel();
+                cm.ProductId = productClicked.Id;
+                cm.Quantity = 1;
+                cm.AvailableStock = Convert.ToInt32(productClicked.Stock);
+                cm.ProductName = productClicked.Name;
+                cm.ProductImage = productClicked.ImageUrl;
+                cm.Price = Convert.ToInt32(productClicked.Price);
+                myCart.Add(cm);
+
+                await sessionStorage.SetAsync("myCart", myCart);
+            }
+        }
+        await updateCartText();
+    }
+
+    private async Task updateCartText()
+    {
+        if(cartFlag)
+        {
+            var result = await sessionStorage.GetAsync<List<CartModel>>("myCart");
+            if(result.Success)
+            {
+                foreach(var _product in products)
+                {
+                    _product.CartFlag = false;    
+                }
+
+                myCart = result.Value;
+                foreach(var cart in myCart)
+                {
+                    var cartProd = products.Where(x => x.Id == cart.ProductId).FirstOrDefault();
+                    if(cartProd!=null)
+                    {
+                        cartProd.CartFlag = true;    
+                    }
+                }
+            }
+        }
     }
 }

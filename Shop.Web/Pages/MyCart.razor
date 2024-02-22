@@ -1,7 +1,141 @@
 ﻿@page "/mycart";
 
-<h3>MyCart</h3>
+@using Shop.DataModels.CustomModels
+@using Shop.Web.Services
+
+@inject IUserPanelService userPanelService;
+@inject ProtectedSessionStorage sessionStorage;
+@inject NavigationManager navManager;
+
+<style>
+
+    .small-container {
+        max-width: 1080px;
+        margin: auto;
+        padding-left: auto;
+    }
+
+    .cart-page {
+        margin: 20px auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .cart-info {
+        display: flex;
+    }
+
+    th {
+        text-align: left;
+        padding: 5px;
+        color: #ffffff;
+        background: #808080;
+        font-weight: normal;
+    }
+
+    td {
+        padding: 10px 5px;
+    }
+
+        td input {
+            width:40px;
+            height:30px;
+            padding:5px;
+        }
+
+        td a {
+            color: #ff523b;
+            font-size: 12px;
+        }
+
+        td img {
+            width:80px;
+            height:80px;
+            margin-right: 10px;
+        }
+
+    .total-price {
+        display:flex;
+        justify-content: flex-end;
+    }
+
+        .total-price table {
+            border:3px solid #ff523b;
+            width:100%;
+            max-width:400px;
+        }
+
+    td:last-child{
+        text-align:right;
+    }
+
+    td:last-child {
+        text-align:right;
+    }
+</style>
+
+<div class="small-container cart-page">
+    @if(myCart!=null && myCart.Count>0)
+    {
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Remove</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </table>
+    }
+</div>
 
 @code {
 
+    [CascadingParameter]
+    public EventCallback notify { get; set; }
+
+    public List<CartModel> myCart { get; set; }
+
+    public string? shippingAddress { get; set; }
+    public string? paymentMode { get; set; }
+    public string? userName { get; set; }
+    public string? userEmail { get; set; }
+    public int subTotal { get; set; }
+    public int shippingCharges { get; set; }
+    public int finalTotal { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        shippingCharges = 100;
+        subTotal = 0;
+        paymentMode = "Cash on Delivery";
+
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var result = await sessionStorage.GetAsync<List<CartModel>>("myCart");
+            if (result.Success)
+            {
+                myCart = result.Value;
+                foreach (var cart_item in myCart)
+                {
+                    subTotal = subTotal + (cart_item.Price * cart_item.Quantity);
+                }
+
+                if (myCart != null && myCart.Count > 0)
+                {
+                    shippingAddress = myCart.FirstOrDefault().ShippingAddress;
+                }
+            }
+
+            finalTotal = subTotal + shippingCharges;
+        }
+    }
 }

@@ -164,7 +164,10 @@
     {
         categoryName = category.Name;
         products = await userPanelService.GetProductByCategoryId(category.Id);
-        await updateCartText();
+        if (products != null && products.Count > 0)
+        {
+            await updateCartText();
+        }
     }
 
     private async Task AddToCart_Click(ProductModel productClicked)

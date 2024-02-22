@@ -1,4 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using Shop.DataModels.CustomModels
+@using Shop.Web.Services
+@inherits LayoutComponentBase
+@inject IUserPanelService userPanelService;
+@inject ProtectedSessionStorage sessionStorage;
+@inject NavigationManager navManager;
 
 <style>
     .mainLayout {
@@ -127,7 +132,9 @@
         Welcome to Shopping Page
     </div>
     <article>
-        @Body
+       <CascadingValue Value="event_notify">
+           @Body    
+       </CascadingValue>
     </article>
     <div class="footer">
         &copy; Shopping Cart Example
@@ -135,10 +142,52 @@
 </div>
 
 @code {
+    EventCallback event_notify => EventCallback.Factory.Create(this, NotifyLayout);
 
     public int cartCount = 0;
+    public int layoutState = 0;
     public bool IsUserLoggedIn = false;
     public string LoggedInUserName = "User";
+    public List<CartModel> myCart { get; set; }
+
+    private async Task NotifyLayout()
+    {
+        // IsUserLoggedIn = await userPanelService.IsUserLoggedIn();
+
+        // if(IsUserLoggedIn && layoutState == 0)
+        // {
+        //     var userNameSession = await sessionStorage.GetAsync<string>("userName");
+        //     LoggedInUserName = userNameSession.Value;
+
+        //     var checkoutSession = await sessionStorage.GetAsync<string>("checkoutAlert");
+        //     if(checkoutSession.Success)
+        //     {
+        //         await sessionStorage.DeleteAsync("checkoutAlert");
+        //         navManager.NavigateTo("/mycart");
+        //     }
+
+        //     StateHasChanged();
+        //     layoutState++;
+        // }
+        if (layoutState == -1)
+        {
+            StateHasChanged();    
+        }
+
+        var result = await sessionStorage.GetAsync<List<CartModel>>("myCart");
+
+        if(result.Success)
+        {
+            myCart = result.Value;
+            cartCount = myCart.Count;
+            await sessionStorage.DeleteAsync("updateCartFlag");
+            StateHasChanged();
+        }
+        else
+        {
+            cartCount = 0;    
+        }
+    }
 
     private void Logout()
     {

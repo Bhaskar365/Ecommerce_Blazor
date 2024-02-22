@@ -143,6 +143,9 @@
     public bool cartFlag = false;
     public List<CartModel> myCart { get; set; }
 
+    [CascadingParameter]
+    public EventCallback notify { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         await GetCategories();
@@ -161,6 +164,7 @@
     {
         categoryName = category.Name;
         products = await userPanelService.GetProductByCategoryId(category.Id);
+        await updateCartText();
     }
 
     private async Task AddToCart_Click(ProductModel productClicked)
@@ -223,6 +227,7 @@
             }
         }
         await updateCartText();
+        await notify.InvokeAsync();
     }
 
     private async Task updateCartText()
@@ -248,5 +253,17 @@
                 }
             }
         }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            var result = await sessionStorage.GetAsync<List<CartModel>>("myCart");
+            if(result.Success)
+            {
+                cartFlag = true;    
+            }
+        }    
     }
 }

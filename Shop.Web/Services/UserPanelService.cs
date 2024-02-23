@@ -8,9 +8,10 @@ namespace Shop.Web.Services
     {
         private readonly HttpClient httpClient;
         private readonly ProtectedSessionStorage sessionStorage;
-        public UserPanelService(HttpClient _httpClient) 
+        public UserPanelService(HttpClient _httpClient, ProtectedSessionStorage _sessionStorage) 
         {
             httpClient = _httpClient;
+            sessionStorage = _sessionStorage;
         }
         public async Task<bool> IsUserLoggedIn()
         {

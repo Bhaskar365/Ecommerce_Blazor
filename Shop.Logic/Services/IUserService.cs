@@ -11,5 +11,7 @@ namespace Shop.Logic.Services
     {
         List<CategoryModel> GetCategories();
         List<ProductModel> GetProductByCategoryId(int categoryId);
+        ResponseModel RegisterUser(RegisterModel registerModel);
+        ResponseModel LoginUser(LoginModel loginModel);
     }
 }

@@ -46,6 +46,77 @@ namespace Shop.Logic.Services
             }
             return _productList;
         }
+        public ResponseModel RegisterUser(RegisterModel registerModel) 
+        {
+            ResponseModel response = new ResponseModel();
+            try 
+            {
+                var exist_check = _context.Customers.Where(x => x.Email == registerModel.EmailId).Any();
 
+                if(!exist_check) 
+                {
+                    Customer _customer = new Customer();
+                    _customer.Name = registerModel.Name;
+                    _customer.MobileNo = registerModel.MobileNo;
+                    _customer.Email = registerModel.MobileNo;
+                    _customer.Password = registerModel.Password;
+                    _context.Add(_customer);
+                    _context.SaveChanges();
+
+                    LoginModel loginModel = new LoginModel()
+                    {
+                        EmailId = registerModel.EmailId,
+                        Password = registerModel.Password,
+                    };
+
+                    response = LoginUser(loginModel);
+                }
+                else 
+                {
+                    response.Status = false;
+                    response.Message = "Email already registered";
+                }
+                return response;
+            }
+            catch(Exception ex) 
+            {
+                response.Status = false;
+                response.Message = "An error has occured. Please try again!";
+                return response;
+            }
+        }
+        public ResponseModel LoginUser(LoginModel loginModel) 
+        {
+            ResponseModel response = new ResponseModel();
+            try 
+            {
+                var userData = _context.Customers.Where(x => x.Email == loginModel.EmailId).FirstOrDefault();
+                if(userData != null) 
+                {
+                    if(userData.Password == loginModel.Password) 
+                    {
+                        response.Status = true;
+                        response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;  
+                    }
+                    else 
+                    {
+                        response.Status = false;
+                        response.Message = "Your password is incorrect";
+                    }
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Email not registered. Please check email id";
+                }
+                return response;
+            }
+            catch(Exception ex) 
+            {
+                response.Status = false;
+                response.Message = "An error has occured. Please try again!";
+                return response;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Shop.DataModels.CustomModels;
+using System.Net.Http.Json;
 
 namespace Shop.Web.Services
 {
@@ -28,6 +29,13 @@ namespace Shop.Web.Services
         public async Task<List<ProductModel>> GetProductByCategoryId(int categoryId)
         {
             return await httpClient.GetFromJsonAsync<List<ProductModel>>("api/user/GetProductByCategoryId/?categoryId=" + categoryId);
+        }
+        public async Task<ResponseModel> RegisterUser(RegisterModel registerModel)
+        {
+            var response = await httpClient.PostAsJsonAsync<RegisterModel>("api/user/RegisterUser", registerModel);
+            ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return result;
         }
     }
 }

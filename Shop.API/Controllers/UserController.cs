@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shop.DataModels.CustomModels;
 using Shop.Logic.Services;
 
 namespace Shop.API.Controllers
@@ -27,6 +28,14 @@ namespace Shop.API.Controllers
         public IActionResult GetProductByCategoryId(int categoryId) 
         {
             var data = _userService.GetProductByCategoryId(categoryId);
+            return Ok(data);
+        }
+
+        [HttpPost]
+        [Route("RegisterUser")]
+        public IActionResult RegisterUser(RegisterModel registerModel) 
+        {
+            var data = _userService.RegisterUser(registerModel);
             return Ok(data);
         }
     }

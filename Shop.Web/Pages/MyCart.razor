@@ -41,9 +41,9 @@
     }
 
         td input {
-            width:40px;
-            height:30px;
-            padding:5px;
+            width: 40px;
+            height: 30px;
+            padding: 5px;
         }
 
         td a {
@@ -52,33 +52,33 @@
         }
 
         td img {
-            width:80px;
-            height:80px;
+            width: 80px;
+            height: 80px;
             margin-right: 10px;
         }
 
     .total-price {
-        display:flex;
+        display: flex;
         justify-content: flex-end;
     }
 
         .total-price table {
-            border:3px solid #ff523b;
-            width:100%;
-            max-width:400px;
+            border: 3px solid #ff523b;
+            width: 100%;
+            max-width: 400px;
         }
 
-    td:last-child{
-        text-align:right;
+    td:last-child {
+        text-align: right;
     }
 
     td:last-child {
-        text-align:right;
+        text-align: right;
     }
 </style>
 
 <div class="small-container cart-page">
-    @if(myCart!=null && myCart.Count>0)
+    @if (myCart != null && myCart.Count > 0)
     {
         <table>
             <tr>
@@ -88,12 +88,12 @@
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            @foreach(var cart in myCart)
+            @foreach (var cart in myCart)
             {
                 <tr>
                     <td>
                         <div class="cart-info">
-                            <img src="http://localhost:5151/@cart.ProductImage" alt="Product Photo"/>
+                            <img src="http://localhost:5151/@cart.ProductImage" alt="Product Photo" />
                             <div>
                                 <p>@cart.ProductName</p>
                             </div>
@@ -101,8 +101,10 @@
                     </td>
                     <td><a @onclick="(()=> RemoveFromCart_Click(cart))" style="cursor:pointer">Remove</a></td>
                     <td>@cart.Price</td>
-                    <td><input type="number" @bind="cart.Quantity" 
-                            min="1" max="@cart.AvailableStock" @onclick="@onQuantityChange" style="width:60px;" /></td>
+                    <td>
+                        <input type="number" @bind="cart.Quantity"
+                               min="1" max="@cart.AvailableStock" @onclick="@onQuantityChange" style="width:60px;" />
+                    </td>
                     <td>@(cart.Price * cart.Quantity).00</td>
                 </tr>
             }
@@ -127,7 +129,7 @@
                     <td>
                         <textarea rows="3" cols="30" name="shippingaddress" placeholder="Shipping Address">
 
-                        </textarea>
+                            </textarea>
                     </td>
                 </tr>
                 <tr>
@@ -189,7 +191,7 @@
     {
         finalTotal = 0;
         subTotal = 0;
-        foreach(var cart_item in myCart)
+        foreach (var cart_item in myCart)
         {
             subTotal = subTotal + (cart_item.Price * cart_item.Quantity);
         }
@@ -198,7 +200,7 @@
 
     private async Task Checkout_Click()
     {
-        
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -221,6 +223,8 @@
             }
 
             finalTotal = subTotal + shippingCharges;
+
+            StateHasChanged();
         }
     }
 }

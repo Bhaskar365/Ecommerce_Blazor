@@ -4,6 +4,7 @@ namespace Shop.Web.Services
 {
     public interface IUserPanelService
     {
+        Task<bool> IsUserLoggedIn();
         Task<List<CategoryModel>> GetCategories();
         Task<List<ProductModel>> GetProductByCategoryId(int categoryId);
     }

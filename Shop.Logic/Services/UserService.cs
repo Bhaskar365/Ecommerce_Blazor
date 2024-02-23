@@ -90,8 +90,8 @@ namespace Shop.Logic.Services
             ResponseModel response = new ResponseModel();
             try 
             {
-                var userData = _context.Customers.Where(x => x.Email == loginModel.EmailId).FirstOrDefault();
-                if(userData != null) 
+              var userData = _context.Customers.Where(x => x.Email == loginModel.EmailId).FirstOrDefault();
+              if (userData != null) 
                 {
                     if(userData.Password == loginModel.Password) 
                     {

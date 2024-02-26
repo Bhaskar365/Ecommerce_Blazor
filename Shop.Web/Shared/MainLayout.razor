@@ -198,8 +198,13 @@
         }
     }
 
-    private void Logout()
+    private async void Logout()
     {
-            
+        await sessionStorage.DeleteAsync("userKey");
+        await sessionStorage.DeleteAsync("userName");
+        await sessionStorage.DeleteAsync("userEmail");
+        await NotifyLayout();
+        navManager.NavigateTo("/");
+        layoutState = -1;
     }
 }

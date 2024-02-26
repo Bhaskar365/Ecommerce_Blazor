@@ -7,9 +7,9 @@ namespace Shop.DataModels.Models
 {
     public partial class ShoppingCartDBContext : DbContext
     {
-        public ShoppingCartDBContext()
-        {
-        }
+        //public ShoppingCartDBContext()
+        //{
+        //}
 
         public ShoppingCartDBContext(DbContextOptions<ShoppingCartDBContext> options)
             : base(options)

@@ -120,6 +120,10 @@
                         placeholder="Password" @bind-Value="registerModel.Password"></InputText>
                 <ValidationMessage For="@(()=> registerModel.Password)"/>
 
+                <InputText type="password" name="email" class="email"
+                           placeholder="Confirm Password" @bind-Value="registerModel.ConfirmPassword"></InputText>
+                <ValidationMessage For="@(()=> registerModel.ConfirmPassword)" />
+
                 <input type="submit" class="btn" value="Register" />
                 <a href="login"><div id="btn2">Login</div></a>
 

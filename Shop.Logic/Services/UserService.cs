@@ -29,11 +29,11 @@ namespace Shop.Logic.Services
             }
             return _categoryList;
         }
-        public List<ProductModel> GetProductByCategoryId(int categoryId) 
+        public List<ProductModel> GetProductByCategoryId(int categoryId)
         {
             var data = _context.Products.Where(x => x.CategoryId == categoryId).ToList();
             List<ProductModel> _productList = new List<ProductModel>();
-            foreach(var p in data) 
+            foreach (var p in data)
             {
                 ProductModel _productModel = new ProductModel();
                 _productModel.Id = p.Id;
@@ -46,20 +46,20 @@ namespace Shop.Logic.Services
             }
             return _productList;
         }
-        public ResponseModel RegisterUser(RegisterModel registerModel) 
+        public ResponseModel RegisterUser(RegisterModel registerModel)
         {
             ResponseModel response = new ResponseModel();
-            
-            try 
+
+            try
             {
                 var exist_check = _context.Customers.Where(x => x.Email == registerModel.EmailId).Any();
 
-                if(!exist_check) 
+                if (!exist_check)
                 {
                     Customer _customer = new Customer();
                     _customer.Name = registerModel.Name;
                     _customer.MobileNo = registerModel.MobileNo;
-                    _customer.Email = registerModel.MobileNo;
+                    _customer.Email = registerModel.EmailId;
                     _customer.Password = registerModel.Password;
                     _context.Add(_customer);
                     _context.SaveChanges();
@@ -72,7 +72,7 @@ namespace Shop.Logic.Services
 
                     response = LoginUser(loginModel);
                 }
-                else 
+                else
                 {
                     response.Status = false;
                     response.Message = "Email already registered";
@@ -80,31 +80,40 @@ namespace Shop.Logic.Services
 
                 return response;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 response.Status = false;
                 response.Message = "An error has occured. Please try again!";
                 return response;
             }
         }
-        public ResponseModel LoginUser(LoginModel loginModel) 
+        public ResponseModel LoginUser(LoginModel loginModel)
         {
-            var userData =  _context.Customers.Where(val => val.Email == loginModel.EmailId).Any();
             ResponseModel response = new ResponseModel();
 
-            try 
+            try
             {
-                if(userData) 
+                var userData = _context.Customers.Where(val => val.Email == loginModel.EmailId).FirstOrDefault();
+                if (userData != null)
                 {
-                    //if(userData.Password ==  loginModel.Password)
+                    if(userData.Password ==  loginModel.Password) 
+                    {
+                        response.Status = true;
+                        response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;
+                    }
+                    else 
+                    {
+                        response.Status = false;
+
+                    }
                 }
-                else 
+                else
                 {
-                    
+
                 }
                 return response;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return response;
             }

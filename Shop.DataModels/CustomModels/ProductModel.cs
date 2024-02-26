@@ -12,22 +12,22 @@ namespace Shop.DataModels.CustomModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Product Name is required")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Product Price is required")]
-        public int? Price { get; set; }
+        public int Price { get; set; }
 
         [Required(ErrorMessage = "Product Stock is requied")]
-        public int? Stock { get; set; }
+        public int Stock { get; set; }
 
         [Required(ErrorMessage = "Product Category is requied")]
-        public int? CategoryId { get; set; }
-        public string? CategoryName { get; set; }
-        public string? ImageUrl { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string ImageUrl { get; set; }
 
         [Required(ErrorMessage = "Kindly Upload Product Photo")]
-        public string? FileName { get; set; }
-        public byte[]? FileContent { get; set; }
+        public string FileName { get; set; }
+        public byte[] FileContent { get; set; }
         public bool CartFlag { get; set; }
     }
 }

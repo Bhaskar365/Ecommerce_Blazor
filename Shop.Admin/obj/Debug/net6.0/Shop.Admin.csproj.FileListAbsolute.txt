@@ -1,12 +1,3 @@
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.csproj.AssemblyReference.cache
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.GeneratedMSBuildEditorConfig.editorconfig
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.AssemblyInfoInputs.cache
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.AssemblyInfo.cs
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.csproj.CoreCompileInputs.cache
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.MvcApplicationPartsAssemblyInfo.cache
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.RazorAssemblyInfo.cache
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.RazorAssemblyInfo.cs
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.sourcelink.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\appsettings.Development.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\appsettings.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.Admin.staticwebassets.runtime.json
@@ -15,6 +6,7 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\ne
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.Admin.runtimeconfig.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.Admin.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.Admin.pdb
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Microsoft.AspNetCore.ProtectedBrowserStorage.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -48,6 +40,15 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\ne
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.DataModels.dll
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Shop.DataModels.pdb
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.csproj.AssemblyReference.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.AssemblyInfoInputs.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.AssemblyInfo.cs
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.csproj.CoreCompileInputs.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.MvcApplicationPartsAssemblyInfo.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.RazorAssemblyInfo.cache
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.RazorAssemblyInfo.cs
+C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.sourcelink.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\staticwebassets.build.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\staticwebassets.development.json
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\staticwebassets\msbuild.Shop.Admin.Microsoft.AspNetCore.StaticWebAssets.props
@@ -65,4 +66,3 @@ C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\ne
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.pdb
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\Shop.Admin.genruntimeconfig.cache
 C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\obj\Debug\net6.0\ref\Shop.Admin.dll
-C:\Angular_RunningPrograms\Blazor_Ecommerce\ShoppingCart\Shop.Admin\bin\Debug\net6.0\Microsoft.AspNetCore.ProtectedBrowserStorage.dll

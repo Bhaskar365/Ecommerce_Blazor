@@ -49,6 +49,7 @@ namespace Shop.Logic.Services
         public ResponseModel RegisterUser(RegisterModel registerModel) 
         {
             ResponseModel response = new ResponseModel();
+            
             try 
             {
                 var exist_check = _context.Customers.Where(x => x.Email == registerModel.EmailId).Any();
@@ -75,7 +76,8 @@ namespace Shop.Logic.Services
                 {
                     response.Status = false;
                     response.Message = "Email already registered";
-                }
+                };
+
                 return response;
             }
             catch(Exception ex) 
@@ -87,34 +89,23 @@ namespace Shop.Logic.Services
         }
         public ResponseModel LoginUser(LoginModel loginModel) 
         {
+            var userData =  _context.Customers.Where(val => val.Email == loginModel.EmailId).Any();
             ResponseModel response = new ResponseModel();
+
             try 
             {
-              var userData = _context.Customers.Where(x => x.Email == loginModel.EmailId).FirstOrDefault();
-              if (userData != null) 
+                if(userData) 
                 {
-                    if(userData.Password == loginModel.Password) 
-                    {
-                        response.Status = true;
-                        response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;  
-                    }
-                    else 
-                    {
-                        response.Status = false;
-                        response.Message = "Your password is incorrect";
-                    }
+                    //if(userData.Password ==  loginModel.Password)
                 }
-                else
+                else 
                 {
-                    response.Status = false;
-                    response.Message = "Email not registered. Please check email id";
+                    
                 }
                 return response;
             }
-            catch(Exception ex) 
+            catch (Exception ex) 
             {
-                response.Status = false;
-                response.Message = "An error has occured. Please try again!";
                 return response;
             }
         }

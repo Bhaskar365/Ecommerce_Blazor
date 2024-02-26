@@ -104,17 +104,21 @@ namespace Shop.Logic.Services
                     else 
                     {
                         response.Status = false;
-
+                        response.Message = "Your password is incorrect";
                     }
                 }
                 else
                 {
-
+                    response.Status = false;
+                    response.Message = "Email not registered. Please check your email ID";
                 }
                 return response;
             }
             catch (Exception ex)
             {
+                response.Status = false;
+                response.Message = "An error has occured. Please try again";
+
                 return response;
             }
         }

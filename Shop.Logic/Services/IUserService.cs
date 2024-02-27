@@ -13,5 +13,6 @@ namespace Shop.Logic.Services
         List<ProductModel> GetProductByCategoryId(int categoryId);
         ResponseModel RegisterUser(RegisterModel registerModel);
         ResponseModel LoginUser(LoginModel loginModel);
+        ResponseModel Checkout(List<CartModel> cartItems);
     }
 }

@@ -133,12 +133,56 @@ namespace Shop.Logic.Services
                 var detail = cartItems.FirstOrDefault();
                 CustomerOrder _customerOrder = new CustomerOrder();
                 _customerOrder.CustomerId = detail.UserId;
+                _customerOrder.OrderId = OrderId;
+                _customerOrder.PaymentMode = detail.PaymentMode;
+                _customerOrder.ShippingAddress = detail.ShippingAddress;
+                _customerOrder.ShippingCharges = detail.ShippingCharges;
+                _customerOrder.SubTotal = detail.SubTotal;
+                _customerOrder.Total = detail.ShippingCharges + detail.SubTotal;
+                _customerOrder.CreatedOn = DateTime.Now.ToString("dd/MM/yyyy");
+                _customerOrder.UpdatedOn = DateTime.Now.ToString("dd/MM/yyyy");
+                _context.CustomerOrders.Add(_customerOrder);
 
+                foreach (var items in cartItems) 
+                {
+                    OrderDetail _orderDetail = new OrderDetail();
+                    _orderDetail.OrderId = OrderId;
+                    _orderDetail.ProductId = items.ProductId;
+                    _orderDetail.Quantity = items.Quantity;
+                    _orderDetail.Price = items.Price;
+                    _orderDetail.UpdatedOn = DateTime.Now.ToString("dd/MM/yyyy");
+                    _context.OrderDetails.Add(_orderDetail);
+
+                    var selected_product = prods.Where(x => x.Id == items.ProductId).FirstOrDefault();
+                    selected_product.Stock = selected_product.Stock - items.Quantity;
+                    _context.Products.Update(selected_product);
+                }
+                _context.SaveChanges();
+
+                ResponseModel response = new ResponseModel();
+                response.Message = OrderId;
+                return response;
             }
             catch(Exception ex) 
             {
-                
+                throw ex;
             }
+        }
+
+        private string GenerateOrderId() 
+        {
+            string OrderId = string.Empty;
+            Random generator = null;
+            for(int i=0;i<1000;i++) 
+            {
+                generator = new Random();
+                OrderId = "p" + generator.Next(1,10000000).ToString("D8");
+                if(!_context.CustomerOrders.Where(x => x.OrderId == OrderId).Any()) 
+                {
+                    break;
+                }
+            }
+            return OrderId;
         }
     }
 }

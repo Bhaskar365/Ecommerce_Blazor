@@ -46,5 +46,13 @@ namespace Shop.API.Controllers
             var data = _userService.LoginUser(loginModel);
             return Ok(data);
         }
+
+        [HttpPost]
+        [Route("Checkout")]
+        public IActionResult Checkout(List<CartModel> cartItems)
+        {
+            var data = _userService.Checkout(cartItems);
+            return Ok(data);
+        }
     }
 }

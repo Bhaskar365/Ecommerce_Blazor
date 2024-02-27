@@ -45,5 +45,12 @@ namespace Shop.Web.Services
 
             return result;
         }
+        public async Task<ResponseModel> Checkout(List<CartModel> cartItems) 
+        {
+            var response = await httpClient.PostAsJsonAsync<List<CartModel>>("api/user/Checkout", cartItems);
+            ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return result;
+        }
     }
 }

@@ -190,6 +190,7 @@
 
     public string? userName { get; set; }
     public string? userEmail { get; set; }
+    public bool IsUserLoggedIn = false;
 
     protected override Task OnInitializedAsync()
     {
@@ -222,7 +223,40 @@
 
     private async Task Checkout_Click()
     {
+        if(myCart != null && myCart.Count > 0)
+        {
+            myCart.FirstOrDefault().ShippingAddress = shippingAddress;
+            myCart.FirstOrDefault().ShippingCharges = shippingCharges;
+            myCart.FirstOrDefault().SubTotal = subTotal;
+            myCart.FirstOrDefault().PaymentMode = paymentMode;
 
+            var session_userKey = await sessionStorage.GetAsync<string>("userKey");
+            if(session_userKey.Success)
+            {
+                myCart.FirstOrDefault().UserId = Convert.ToInt32(session_userKey.Value);    
+            }
+
+            await sessionStorage.SetAsync("myCart" , myCart);
+            IsUserLoggedIn = await userPanelService.IsUserLoggedIn();
+
+            if (IsUserLoggedIn)
+            {
+                var response = await userPanelService.Checkout(myCart);
+                if (response != null)
+                {
+                    myCart.Clear();
+                    await sessionStorage.SetAsync("myCart", myCart);
+                    await sessionStorage.SetAsync("latestOrder", response.Message);
+                    await notify.InvokeAsync();
+                    navManager.NavigateTo("myaccount");
+                }
+            }
+            else
+            {
+                await sessionStorage.SetAsync("checkoutAlert", "** Note : Login / Register to place your order !!");
+                navManager.NavigateTo("login");
+            }
+        }
     }
 
     private async Task Clear_Click()

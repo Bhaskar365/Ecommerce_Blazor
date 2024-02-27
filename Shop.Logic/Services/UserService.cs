@@ -38,9 +38,9 @@ namespace Shop.Logic.Services
                 ProductModel _productModel = new ProductModel();
                 _productModel.Id = p.Id;
                 _productModel.Name = p.Name;
-                _productModel.Price = p.Price;
+                _productModel.Price = (int)p.Price;
                 _productModel.ImageUrl = p.ImageUrl;
-                _productModel.Stock = p.Stock;
+                _productModel.Stock = (int)p.Stock;
                 _productModel.CategoryId = p.Id;
                 _productList.Add(_productModel);
             }
@@ -91,7 +91,7 @@ namespace Shop.Logic.Services
         {
             ResponseModel response = new ResponseModel();
 
-            if (loginModel != null)
+            try
             {
                 var userData = _context.Customers.Where(val => val.Email == loginModel.EmailId).FirstOrDefault();
                 if (userData != null)
@@ -106,51 +106,39 @@ namespace Shop.Logic.Services
                         response.Status = false;
                         response.Message = "Your password is incorrect";
                     }
-                    return response;
                 }
                 else
                 {
                     response.Status = false;
                     response.Message = "Email not registered. Please check your email ID";
-
-                    return response;
                 }
+                return response;
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("something wrong");
+                response.Status = false;
+                response.Message = "An error has occured. Please try again";
+
+                return response;
             }
+        }
 
-            //try
-            //{
-            //    var userData = _context.Customers.Where(val => val.Email == loginModel.EmailId).FirstOrDefault();
-            //    if (userData != null)
-            //    {
-            //        if (userData.Password == loginModel.Password)
-            //        {
-            //            response.Status = true;
-            //            response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;
-            //        }
-            //        else
-            //        {
-            //            response.Status = false;
-            //            response.Message = "Your password is incorrect";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        response.Status = false;
-            //        response.Message = "Email not registered. Please check your email ID";
-            //    }
-            //    return response;
-            //}
-            //catch (Exception ex)
-            //{
-            //    response.Status = false;
-            //    response.Message = "An error has occured. Please try again";
+        public ResponseModel Checkout(List<CartModel> cartItems) 
+        {
+            string OrderId = GenerateOrderId();
+            var prods = _context.Products.ToList();
 
-            //    return response;
-            //}
+            try 
+            {
+                var detail = cartItems.FirstOrDefault();
+                CustomerOrder _customerOrder = new CustomerOrder();
+                _customerOrder.CustomerId = detail.UserId;
+
+            }
+            catch(Exception ex) 
+            {
+                
+            }
         }
     }
 }

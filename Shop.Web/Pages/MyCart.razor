@@ -77,6 +77,26 @@
     }
 </style>
 
+<div style="padding:10px 0px 0px 10px; text-align:right;">
+    @if(userName !=null && userEmail != null)
+    {
+        <span>
+            <span style="border:1px ridge #ff523b;background-color:#ff6a00;border-radius:10px;color:black;padding:3px">Cart</span>
+                &nbsp;&nbsp;
+                <b>
+                    Name : @userName
+                    &nbsp;&nbsp;
+                    Email : @userEmail
+                    &nbsp;&nbsp;
+                </b>
+        </span>    
+    }
+    @if(myCart!=null && myCart.Count > 0)
+    {
+        <button type="button" value="Clear" class="btn btn-primary" @onclick="@Clear_Click">Clear</button>    
+    }
+</div>
+
 <div class="small-container cart-page">
     @if (myCart != null && myCart.Count > 0)
     {
@@ -163,11 +183,13 @@
 
     public string? shippingAddress { get; set; }
     public string? paymentMode { get; set; }
-    public string? userName { get; set; }
-    public string? userEmail { get; set; }
+
     public int subTotal { get; set; }
     public int shippingCharges { get; set; }
     public int finalTotal { get; set; }
+
+    public string? userName { get; set; }
+    public string? userEmail { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -203,6 +225,13 @@
 
     }
 
+    private async Task Clear_Click()
+    {
+        myCart = new List<CartModel>();
+        await sessionStorage.DeleteAsync("myCart");
+        await notify.InvokeAsync();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -223,6 +252,14 @@
             }
 
             finalTotal = subTotal + shippingCharges;
+
+            var session_userName = await sessionStorage.GetAsync<string>("userName");
+            var session_userEmail = await sessionStorage.GetAsync<string>("userEmail");
+            if(session_userName.Success && session_userEmail.Success)
+            {
+                userName = session_userName.Value;
+                userEmail = session_userEmail.Value;
+            }
 
             StateHasChanged();
         }

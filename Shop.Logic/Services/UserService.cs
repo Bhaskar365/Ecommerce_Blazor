@@ -91,36 +91,66 @@ namespace Shop.Logic.Services
         {
             ResponseModel response = new ResponseModel();
 
-            try
+            if (loginModel != null)
             {
                 var userData = _context.Customers.Where(val => val.Email == loginModel.EmailId).FirstOrDefault();
                 if (userData != null)
                 {
-                    if(userData.Password ==  loginModel.Password) 
+                    if (userData.Password == loginModel.Password)
                     {
                         response.Status = true;
                         response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;
                     }
-                    else 
+                    else
                     {
                         response.Status = false;
                         response.Message = "Your password is incorrect";
                     }
+                    return response;
                 }
                 else
                 {
                     response.Status = false;
                     response.Message = "Email not registered. Please check your email ID";
-                }
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = false;
-                response.Message = "An error has occured. Please try again";
 
-                return response;
+                    return response;
+                }
             }
+            else
+            {
+                throw new Exception("something wrong");
+            }
+
+            //try
+            //{
+            //    var userData = _context.Customers.Where(val => val.Email == loginModel.EmailId).FirstOrDefault();
+            //    if (userData != null)
+            //    {
+            //        if (userData.Password == loginModel.Password)
+            //        {
+            //            response.Status = true;
+            //            response.Message = Convert.ToString(userData.Id) + "|" + userData.Name + "|" + userData.Email;
+            //        }
+            //        else
+            //        {
+            //            response.Status = false;
+            //            response.Message = "Your password is incorrect";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        response.Status = false;
+            //        response.Message = "Email not registered. Please check your email ID";
+            //    }
+            //    return response;
+            //}
+            //catch (Exception ex)
+            //{
+            //    response.Status = false;
+            //    response.Message = "An error has occured. Please try again";
+
+            //    return response;
+            //}
         }
     }
 }

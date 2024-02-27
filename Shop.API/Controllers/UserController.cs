@@ -38,5 +38,13 @@ namespace Shop.API.Controllers
             var data = _userService.RegisterUser(registerModel);
             return Ok(data);
         }
+
+        [HttpPost]
+        [Route("LoginUser")]
+        public IActionResult LoginUser(LoginModel loginModel) 
+        {
+            var data = _userService.LoginUser(loginModel);
+            return Ok(data);
+        }
     }
 }

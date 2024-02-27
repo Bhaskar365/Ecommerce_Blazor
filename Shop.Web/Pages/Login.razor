@@ -97,6 +97,52 @@
         }
 </style>
 
+<div style="min-height:400px;">
+    <div class="loginBox">
+        <div class="box">
+            <h1>Login</h1>
+            @if(loginModel != null)
+            {
+                <EditForm Model="@loginModel" OnValidSubmit="Login_Click">
+                    <DataAnnotationsValidator />
+
+                    <InputText type="email" 
+                        name="email"class="email" 
+                        placeholder="Email" @bind-Value="loginModel.EmailId" autocomplete="off" />
+                    <ValidationMessage For="@(()=> loginModel.EmailId)"></ValidationMessage>
+
+                    <InputText type="password" 
+                        name="email" class="email" 
+                        placeholder="Password" @bind-Value="loginModel.Password" />
+                    <ValidationMessage For="@(()=> loginModel.Password)"></ValidationMessage>
+
+                    <InputText type="text"
+                               name="email" class="email"
+                               placeholder="UserKey" @bind-Value="loginModel.UserKey" autocomplete="off" />
+                    <ValidationMessage For="@(()=> loginModel.UserKey)"></ValidationMessage>
+
+                    <InputText type="text"
+                               name="email" class="email"
+                               placeholder="Name" @bind-Value="loginModel.Name" autocomplete="off" />
+                    <ValidationMessage For="@(()=> loginModel.Name)"></ValidationMessage>
+
+                    <input type="submit" class="btn" value="Login" />
+                    <a href="register">
+                        <div id="btn2">Register</div>
+                    </a>
+
+                </EditForm>    
+            }
+        </div>
+        <div>
+            <br />
+            <br />
+            <p style="color: #e52e50;">
+                <h4>@alertMessage</h4>
+            </p>
+        </div>
+    </div>
+</div>
 
 
 @code {
@@ -111,6 +157,24 @@
     {
         loginModel = new LoginModel();
         return base.OnInitializedAsync();
+    }
+
+    public async Task Login_Click()
+    {
+        var response = await userPanelService.LoginUser(loginModel);
+        if(response.Status)
+        {
+            var user_response = response.Message.Split("|");
+            await sessionStorage.SetAsync("userKey", user_response[0]);
+            await sessionStorage.SetAsync("userName", user_response[1]);
+            await sessionStorage.SetAsync("userEmail", user_response[2]);
+            await notify.InvokeAsync();
+            navManager.NavigateTo("/");
+        }
+        else
+        {
+            alertMessage = response.Message;
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

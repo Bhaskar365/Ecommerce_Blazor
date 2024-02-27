@@ -38,5 +38,12 @@ namespace Shop.Web.Services
 
             return result;
         }
+        public async Task<ResponseModel> LoginUser(LoginModel loginModel) 
+        {
+            var response = await httpClient.PostAsJsonAsync<LoginModel>("api/user/LoginUser", loginModel);
+            ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return result;
+        }
     }
 }

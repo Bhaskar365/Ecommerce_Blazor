@@ -150,6 +150,8 @@ namespace Shop.Logic.Services
                     _orderDetail.ProductId = items.ProductId;
                     _orderDetail.Quantity = items.Quantity;
                     _orderDetail.Price = items.Price;
+                    _orderDetail.SubTotal = items.Price * items.Quantity;
+                    _orderDetail.CreatedOn = DateTime.Now.ToString("dd/MM/yyyy");
                     _orderDetail.UpdatedOn = DateTime.Now.ToString("dd/MM/yyyy");
                     _context.OrderDetails.Add(_orderDetail);
 
@@ -157,10 +159,12 @@ namespace Shop.Logic.Services
                     selected_product.Stock = selected_product.Stock - items.Quantity;
                     _context.Products.Update(selected_product);
                 }
+
                 _context.SaveChanges();
 
                 ResponseModel response = new ResponseModel();
                 response.Message = OrderId;
+
                 return response;
             }
             catch(Exception ex) 
@@ -176,7 +180,7 @@ namespace Shop.Logic.Services
             for(int i=0;i<1000;i++) 
             {
                 generator = new Random();
-                OrderId = "p" + generator.Next(1,10000000).ToString("D8");
+                OrderId = "P" + generator.Next(1,10000000).ToString("D8");
                 if(!_context.CustomerOrders.Where(x => x.OrderId == OrderId).Any()) 
                 {
                     break;

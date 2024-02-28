@@ -12,5 +12,8 @@ namespace Shop.Web.Services
         Task<ResponseModel> LoginUser(LoginModel loginModel);
         Task<ResponseModel> Checkout(List<CartModel> cartItems);
         Task<List<CustomerOrder>> GetOrdersByCustomerId(int customerId);
+        Task<List<CartModel>> GetOrderDetailForCustomer(int customerId, string order_number);
+        Task<List<string>> GetShippingStatusForOrder(string order_number);
+        Task<ResponseModel> ChangePassword(PasswordModel passwordModel);
     }
 }

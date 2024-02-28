@@ -210,7 +210,41 @@
 
 </div>
 
-@if(showOrderDetail)
+@if(showTrackOrder)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Track Order</h5>
+                <span class="close" @onclick="ToggleTrackOrderPopup">&times;</span>
+            </div>
+            <div class="modal-body">
+                @if(shippingUpdates!=null && shippingUpdates.Count > 0)
+                {
+                    <table>
+                        <tbody>
+                            @foreach(var odr in shippingUpdates)
+                            {
+                                <tr>
+                                    <td>@odr</td>
+                                </tr>    
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>No update on order shipping. Please check after some time.</span>    
+                }
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-info" value="Close" @onclick="ToggleTrackOrderPopup" />
+            </div>
+        </div>
+    </div>
+}
+
+@if(showOrderDetail == true)
 {
     <div class="modal">
         <div class="modal-content">
@@ -239,10 +273,21 @@
 
                     <table style="width:550px;border:1px ridge #f5750d;">
                         <tr>
-
+                            <td>Subtotal - @subTotal.00</td>
+                            <td>Shipping Charges - @shippingCharges.00</td>
+                        </tr>
+                        <tr>
+                            <td>SubTotal - @finalTotal.00</td>
+                            <td>Shipping Address - @shippingAddress</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Mode - @paymentMode</td>
                         </tr>
                     </table>
                  }
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-secondary" value="Close" @onclick="ToggleOrderDetailPopup" />
             </div>
         </div>
     </div>    
@@ -294,7 +339,7 @@
     public int finalTotal { get; set; }
 
     protected override Task OnInitializedAsync()
-    {
+    { 
         products = new List<ProductModel>();
         customerOrders = new List<CustomerOrder>();
         passwordModel = new PasswordModel();
@@ -338,6 +383,62 @@
     private void ToggleAlertMessage()
     {
         showAlertMessage = showAlertMessage == true ? false : true;
+    }
+
+    private void ToggleOrderDetailPopup()
+    {
+        showOrderDetail = showOrderDetail == true ? false : true;
+    }
+
+    private void ToggleTrackOrderPopup()
+    {
+        showTrackOrder = showTrackOrder == true ? false : true;
+    }
+
+    private async Task GetOrderDetailForCustomer(int customerId, string order_number)
+    {
+        myCart = await userPanelService.GetOrderDetailForCustomer(customerId, order_number);
+
+        if(myCart!=null && myCart.Count>0)
+        {
+            shippingAddress = myCart.FirstOrDefault().ShippingAddress;
+            shippingCharges = myCart.FirstOrDefault().ShippingCharges;
+            subTotal = myCart.FirstOrDefault().SubTotal;
+            finalTotal = myCart.FirstOrDefault().Total;
+            paymentMode = myCart.FirstOrDefault().PaymentMode;
+        }
+    }
+
+    private async Task ChangePassword_Click()
+    {
+        if(passwordModel.Password != passwordModel.ConfirmPassword) 
+        {
+            alertMessage = "Password and Confirm Password don't match";
+            ToggleAlertMessage();
+        }
+        else
+        {
+            passwordModel.UserKey = userKey;
+            response = await userPanelService.ChangePassword(passwordModel);
+            if(response.Status)
+            {
+                passwordModel = new PasswordModel();
+                alertMessage = response.Message;
+                ToggleAlertMessage();
+            }
+        }
+    }
+
+    private async Task Detail_Click(string order_number)
+    {
+        await GetOrderDetailForCustomer(userKey, order_number);
+        ToggleOrderDetailPopup();
+    }
+
+    private async Task Track_Click(string order_number)
+    {
+        shippingUpdates = await userPanelService.GetShippingStatusForOrder(order_number);
+        ToggleTrackOrderPopup();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

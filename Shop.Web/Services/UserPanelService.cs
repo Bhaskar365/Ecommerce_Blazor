@@ -53,10 +53,24 @@ namespace Shop.Web.Services
 
             return result;
         }
-
         public async Task<List<CustomerOrder>> GetOrdersByCustomerId(int customerId) 
         {
             return await httpClient.GetFromJsonAsync<List<CustomerOrder>>("api/user/GetOrdersByCustomerId/?customerId=" + customerId);
+        }
+        public async Task<List<CartModel>> GetOrderDetailForCustomer(int customerId, string order_number) 
+        {
+            return await httpClient.GetFromJsonAsync<List<CartModel>>("api/user/GetOrderDetailForCustomer/?customerId=" + customerId + "&order_number=" + order_number);
+        }
+        public async Task<List<string>> GetShippingStatusForOrder(string order_number) 
+        {
+            return await httpClient.GetFromJsonAsync<List<string>>("api/user/GetShippingStatusForOrder/?order_number=" + order_number);
+        }
+        public async Task<ResponseModel> ChangePassword(PasswordModel passwordModel) 
+        {
+            var response = await httpClient.PostAsJsonAsync<PasswordModel>("api/user/ChangePassword", passwordModel);
+            ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
+
+            return result;
         }
     }
 }

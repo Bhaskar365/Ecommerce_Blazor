@@ -63,7 +63,7 @@
     }
 
         .total-price table {
-            border: 3px solid #ff523b;
+            /* border: 3px solid #ff523b; */
             width: 100%;
             max-width: 400px;
         }
@@ -119,11 +119,15 @@
                             </div>
                         </div>
                     </td>
-                    <td><a @onclick="(()=> RemoveFromCart_Click(cart))" style="cursor:pointer">Remove</a></td>
+                    <td>
+                        <a @onclick="(()=> RemoveFromCart_Click(cart))" style="cursor:pointer">Remove</a>
+                    </td>
                     <td>@cart.Price</td>
                     <td>
                         <input type="number" @bind="cart.Quantity"
-                               min="1" max="@cart.AvailableStock" @onclick="@onQuantityChange" style="width:60px;" />
+                               min="1" max="@cart.AvailableStock" 
+                               @onclick="@onQuantityChange" 
+                               style="width:60px;" />
                     </td>
                     <td>@(cart.Price * cart.Quantity).00</td>
                 </tr>
@@ -147,9 +151,9 @@
                 <tr>
                     <td>Shipping Address</td>
                     <td>
-                        <textarea rows="3" cols="30" name="shippingaddress" placeholder="Shipping Address">
-
-                            </textarea>
+                        <textarea rows="3" cols="30" name="shippingaddress" 
+                            placeholder="Shipping Address" @bind="shippingAddress">
+                        </textarea>
                     </td>
                 </tr>
                 <tr>
@@ -159,7 +163,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button type="button" value="Checkout" class="btn btn-primary" @onclick="@Checkout_Click">Checkout</button>
+                        <button type="button" value="Checkout" 
+                            class="btn btn-primary" @onclick="@Checkout_Click">Checkout</button>
                     </td>
                 </tr>
             </table>

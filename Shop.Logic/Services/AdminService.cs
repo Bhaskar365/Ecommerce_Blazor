@@ -118,8 +118,8 @@ namespace Shop.Logic.Services
                 ProductModel _productModel = new ProductModel();
                 _productModel.Id = p.Id;
                 _productModel.Name = p.Name;
-                _productModel.Price = p.Price;
-                _productModel.Stock = p.Stock;
+                _productModel.Price = (int)p.Price;
+                _productModel.Stock = (int)p.Stock;
                 _productModel.ImageUrl = p.ImageUrl;
                 _productModel.CategoryId = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Id).FirstOrDefault();
                 _productModel.CategoryName = categoryData.Where(x => x.Id == p.CategoryId).Select(x => x.Name).FirstOrDefault();

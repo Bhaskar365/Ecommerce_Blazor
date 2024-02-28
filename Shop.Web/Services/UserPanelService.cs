@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Shop.DataModels.CustomModels;
+using Shop.DataModels.Models;
 using System.Net.Http.Json;
 
 namespace Shop.Web.Services
@@ -51,6 +52,11 @@ namespace Shop.Web.Services
             ResponseModel result = await response.Content.ReadFromJsonAsync<ResponseModel>();
 
             return result;
+        }
+
+        public async Task<List<CustomerOrder>> GetOrdersByCustomerId(int customerId) 
+        {
+            return await httpClient.GetFromJsonAsync<List<CustomerOrder>>("api/user/GetOrdersByCustomerId/?customerId=" + customerId);
         }
     }
 }

@@ -253,5 +253,7 @@ namespace Shop.Logic.Services
             }
             return shipping_status;
         }
+
+
     }
 }

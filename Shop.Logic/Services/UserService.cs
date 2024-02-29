@@ -239,10 +239,19 @@ namespace Shop.Logic.Services
             }
             else 
             {
-                response.Message = "User does not exist. Try again !!";
+                response.Message = "User ID does not exist. Try again !!";
             }
             return response;
         }
-
+        public List<string> GetShippingStatusForOrder(string order_number) 
+        {
+            List<string> shipping_status = new List<string>();
+            var order = _context.CustomerOrders.Where(x => x.OrderId == order_number).FirstOrDefault();
+            if(order != null && order.ShippingStatus != null) 
+            {
+                shipping_status = order.ShippingStatus.Split("|").ToList();
+            }
+            return shipping_status;
+        }
     }
 }

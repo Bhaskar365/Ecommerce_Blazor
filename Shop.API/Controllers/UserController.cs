@@ -54,5 +54,37 @@ namespace Shop.API.Controllers
             var data = _userService.Checkout(cartItems);
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("GetOrdersByCustomerId")]
+        public IActionResult GetOrdersByCustomerId(int CustomerId) 
+        {
+            var data = _userService.GetOrdersByCustomerId(CustomerId);
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("GetOrderDetailForCustomer")]
+        public IActionResult GetOrderDetailForCustomer(int CustomerId, string order_number) 
+        {
+            var data = _userService.GetOrderDetailForCustomer(CustomerId, order_number);
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("GetShippingStatusForOrder")]
+        public IActionResult GetShippingStatusForOrder(string order_number) 
+        {
+            var data = _userService.GetShippingStatusForOrder(order_number);
+            return Ok(data);
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public IActionResult ChangePassword(PasswordModel passwordModel) 
+        {
+            var data = _userService.ChangePassword(passwordModel);
+            return Ok(data);
+        }
     }
 }

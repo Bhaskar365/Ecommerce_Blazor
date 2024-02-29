@@ -16,6 +16,7 @@ namespace Shop.Logic.Services
         {
             _context = context;
         }
+
         public List<CategoryModel> GetCategories()
         {
             var data = _context.Categories.ToList();
@@ -122,7 +123,6 @@ namespace Shop.Logic.Services
                 return response;
             }
         }
-
         public ResponseModel Checkout(List<CartModel> cartItems) 
         {
             string OrderId = GenerateOrderId();
@@ -172,7 +172,6 @@ namespace Shop.Logic.Services
                 throw ex;
             }
         }
-
         private string GenerateOrderId() 
         {
             string OrderId = string.Empty;
@@ -188,5 +187,62 @@ namespace Shop.Logic.Services
             }
             return OrderId;
         }
+        public List<CustomerOrder> GetOrdersByCustomerId(int customerId) 
+        {
+            var _customerOrders = _context.CustomerOrders.Where(x => x.CustomerId == customerId)
+                .OrderByDescending(x => x.Id).ToList();
+            return _customerOrders;
+        }
+        public List<CartModel> GetOrderDetailForCustomer(int customerId, string order_number) 
+        {
+            List<CartModel> cart_details = new List<CartModel>();
+
+            var customer_order = _context.CustomerOrders.Where(x => x.CustomerId == customerId && x.OrderId == order_number).FirstOrDefault();
+
+            if(customer_order!=null) 
+            {
+                var order_detail = _context.OrderDetails.Where(x => x.OrderId == order_number).ToList();
+                var product_list = _context.Products.ToList();
+
+                foreach (var order in order_detail) 
+                {
+                    var prod = product_list.Where(x => x.Id == order.ProductId).FirstOrDefault();
+                    CartModel _cartModel = new CartModel();
+                    _cartModel.ProductName = prod.Name;
+                    _cartModel.Price = Convert.ToInt32(order.Price);
+                    _cartModel.ProductImage = prod.ImageUrl;
+                    _cartModel.Quantity = Convert.ToInt32(order.Quantity);
+                    cart_details.Add(_cartModel);
+                }
+
+                cart_details.FirstOrDefault().ShippingAddress = customer_order.ShippingAddress;
+                cart_details.FirstOrDefault().ShippingCharges = Convert.ToInt32(customer_order.ShippingCharges);
+                cart_details.FirstOrDefault().SubTotal = Convert.ToInt32(customer_order.SubTotal);
+                cart_details.FirstOrDefault().Total = Convert.ToInt32(customer_order.Total);
+                cart_details.FirstOrDefault().PaymentMode = customer_order.PaymentMode;
+            }
+            return cart_details;
+        } 
+        public ResponseModel ChangePassword(PasswordModel passwordModel) 
+        {
+            ResponseModel response = new ResponseModel();
+            response.Status = true;
+
+            var _customer = _context.Customers.Where(x => x.Id == passwordModel.UserKey).FirstOrDefault();
+            if (_customer != null) 
+            {
+                _customer.Password = passwordModel.Password;
+                _context.Customers.Update(_customer);
+                _context.SaveChanges();
+
+                response.Message = "Password updated successfully !!";
+            }
+            else 
+            {
+                response.Message = "User does not exist. Try again !!";
+            }
+            return response;
+        }
+
     }
 }

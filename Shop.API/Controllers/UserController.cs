@@ -86,5 +86,13 @@ namespace Shop.API.Controllers
             var data = _userService.ChangePassword(passwordModel);
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("CheckoutStripe")]
+        public IActionResult CheckoutStripe(string cardNumber, int expMonth, int expYear, string cvc, decimal value) 
+        {
+            var data = _userService.MakePaymentStripe(cardNumber, expMonth, expYear, cvc, value);
+            return Ok(data);
+        }
     }
 }

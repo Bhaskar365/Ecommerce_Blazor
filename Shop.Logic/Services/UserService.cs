@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.DataModels.CustomModels;
 using Shop.DataModels.Models;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace Shop.Logic.Services
 
                 if (!exist_check)
                 {
-                    Customer _customer = new Customer();
+                    DataModels.Models.Customer _customer = new DataModels.Models.Customer();
                     _customer.Name = registerModel.Name;
                     _customer.MobileNo = registerModel.MobileNo;
                     _customer.Email = registerModel.EmailId;
@@ -254,6 +255,62 @@ namespace Shop.Logic.Services
             return shipping_status;
         }
 
+        public async Task<string> MakePaymentStripe(string cardNumber, int expMonth, int expYear, string cvc, decimal value) 
+        {
+            try 
+            {
+                StripeConfiguration.ApiKey = "the secret stripe key";
+                var optionToken = new TokenCreateOptions
+                {
+                    Card = new TokenCardOptions 
+                    {
+                        Number = cardNumber,
+                        ExpMonth = expMonth.ToString(),
+                        ExpYear = expYear.ToString(),
+                        Cvc = cvc
+                    }
+                };
 
+                var serviceToken = new TokenService();
+                Token stripetoken = await serviceToken.CreateAsync(optionToken);
+
+                var customer = new Stripe.Customer
+                {
+                    Name = "Jackson",
+                    Address = new Address
+                    {
+                        Country = "India",
+                        City = "Mumbai",
+                        Line1 = "304 - Villa Road, Mumbai",
+                        PostalCode = "400503"
+                    }
+                };
+
+                var options = new ChargeCreateOptions()
+                {
+                    Amount = Convert.ToInt32(value),
+                    Currency = "INR",
+                    Description = "Test",
+                    Source = stripetoken.Id
+                };
+
+                var service = new ChargeService();
+                Charge charge = await service.CreateAsync(options);
+
+                if(charge.Paid) 
+                {
+                    return "Success";
+                }
+                else 
+                {
+                    return "Fail";
+                }
+
+            }
+            catch(Exception ex) 
+            {
+                throw ex;
+            }
+        }
     }
 }

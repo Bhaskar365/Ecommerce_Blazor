@@ -94,5 +94,13 @@ namespace Shop.API.Controllers
             var data = _userService.MakePaymentStripe(cardNumber, expMonth, expYear, cvc, value);
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("CheckoutPayPal")]
+        public async Task<IActionResult> CheckoutPayPal(double total)
+        {
+            var url = await _userService.MakePaymentPaypal(total);
+            return Ok(url);
+        }
     }
 }

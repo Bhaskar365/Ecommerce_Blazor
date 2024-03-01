@@ -18,6 +18,41 @@ namespace Shop.Logic.PayPal
         {
            configuration = _configuration;
         }
+        public async Task<string> getRedirectURLToPayPal(double total, string currency) 
+        {
+            try
+            {
+                return Task.Run(async () =>
+                {
+                    HttpClient http = GetPaypalHttpClient();
+
+                    // get an access token
+                    PayPalAccessToken accessToken = await GetPayPalAccessTokenAsync(http);
+
+                    //create payment
+                    PayPalCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken, total, currency);
+                    var approval_url = createdPayment.links.First(x => x.rel == "approved_url").href;
+                    return approval_url;
+                }).Result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private HttpClient GetPaypalHttpClient() 
+        {
+            const string sandbox = "https://api.sandbox.paypal.com";
+
+            var http = new HttpClient 
+            {
+                BaseAddress = new Uri(sandbox),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            return http;
+        }
 
         private async Task<PayPalAccessToken> GetPayPalAccessTokenAsync(HttpClient http) 
         {

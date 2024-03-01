@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Shop.DataModels.CustomModels;
 using Shop.DataModels.Models;
+using Shop.Logic.PayPal;
 using Stripe;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,12 @@ namespace Shop.Logic.Services
     public class UserService : IUserService
     {
         private readonly ShoppingCartDBContext _context;
-        public UserService(ShoppingCartDBContext context)
+        public IConfiguration _configuration { get; }
+        public UserService(ShoppingCartDBContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration; 
         }
-
         public List<CategoryModel> GetCategories()
         {
             var data = _context.Categories.ToList();
@@ -310,6 +313,20 @@ namespace Shop.Logic.Services
             catch(Exception ex) 
             {
                 throw ex;
+            }
+        }
+        
+        public async Task<string> MakePaymentPaypal(double total) 
+        {
+            try
+            {
+                var payPalAPI = new PayPalAPI(_configuration);
+                string url = await payPalAPI.getRedirectURLToPayPal(total, "USD");
+                return url;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
     }

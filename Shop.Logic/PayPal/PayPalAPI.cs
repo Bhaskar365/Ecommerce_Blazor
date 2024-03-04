@@ -14,11 +14,11 @@ namespace Shop.Logic.PayPal
     {
         public IConfiguration configuration { get; }
 
-        public PayPalAPI(IConfiguration _configuration) 
+        public PayPalAPI(IConfiguration _configuration)
         {
-           configuration = _configuration;
+            configuration = _configuration;
         }
-        public async Task<string> getRedirectURLToPayPal(double total, string currency) 
+        public async Task<string> getRedirectURLToPayPal(double total, string currency)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Shop.Logic.PayPal
 
                     //create payment
                     PayPalCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken, total, currency);
-                    var approval_url = createdPayment.links.First(x => x.rel == "approved_url").href;
+                    var approval_url = createdPayment.links.First(x => x.rel == "approval_url").href;
                     return approval_url;
                 }).Result;
             }
@@ -42,11 +42,11 @@ namespace Shop.Logic.PayPal
             }
         }
 
-        private HttpClient GetPaypalHttpClient() 
+        private HttpClient GetPaypalHttpClient()
         {
             const string sandbox = "https://api.sandbox.paypal.com";
 
-            var http = new HttpClient 
+            var http = new HttpClient
             {
                 BaseAddress = new Uri(sandbox),
                 Timeout = TimeSpan.FromSeconds(30)
@@ -54,7 +54,7 @@ namespace Shop.Logic.PayPal
             return http;
         }
 
-        private async Task<PayPalAccessToken> GetPayPalAccessTokenAsync(HttpClient http) 
+        private async Task<PayPalAccessToken> GetPayPalAccessTokenAsync(HttpClient http)
         {
             var clientId = configuration["Paypal:clientId"];
             var secret = configuration["Paypal:secret"];
@@ -78,18 +78,18 @@ namespace Shop.Logic.PayPal
             return accessToken;
         }
 
-        private static async Task<PayPalCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, double total, string currency) 
+        private static async Task<PayPalCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, double total, string currency)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
 
-            var payment = JObject.FromObject(new 
+            var payment = JObject.FromObject(new
             {
                 intent = "sale",
                 redirect_urls = new
                 {
-                    return_url = "",
-                    cancel_url = ""
+                    return_url = "http://example.com/yourRedirect.html",
+                    cancel_url = "http://example.com/yourCancel.html"
                 },
                 payer = new { payment_method = "paypal" },
                 transactions = JArray.FromObject(new[]
@@ -112,9 +112,9 @@ namespace Shop.Logic.PayPal
             string content = await response.Content.ReadAsStringAsync();
             PayPalCreatedResponse paypalPaymentCreated = JsonConvert.DeserializeObject<PayPalCreatedResponse>(content);
             return paypalPaymentCreated;
-        } 
+        }
 
-        private static async Task<PayPalExecutedResponse> ExecutePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, string paymentId, string payerId) 
+        private static async Task<PayPalExecutedResponse> ExecutePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, string paymentId, string payerId)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"v1/payments/payment/{paymentId}/execute");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);

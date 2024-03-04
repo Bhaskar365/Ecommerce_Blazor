@@ -214,7 +214,7 @@
                                         <td>CVV</td>
                                         <td>
                                             <input type="email" name="email" 
-                                                placeholder="CVV" @bind="Stripe_Cvc"
+                                                placeholder="CVC" @bind="Stripe_Cvc"
                                                 autocomplete="off" style="width:150px;" />
                                         </td>
                                     </tr>
@@ -309,6 +309,22 @@
             myCart.FirstOrDefault().ShippingCharges = shippingCharges;
             myCart.FirstOrDefault().SubTotal = subTotal;
             myCart.FirstOrDefault().PaymentMode = paymentMode;
+
+            if(paymentModel.Name == "PayPal") 
+            {
+                myCart.FirstOrDefault().PayPalPayment = finalTotal;
+                myCart.FirstOrDefault().PaymentMode = paymentModel.Name;
+            }
+
+            if(paymentModel.Name == "Stripe")
+            {
+                myCart.FirstOrDefault().Stripecard_Number = Stripecard_Number;
+                myCart.FirstOrDefault().Stripeexp_Month = Stripeexp_Month;
+                myCart.FirstOrDefault().Stripeexp_Year = Stripeexp_Year;
+                myCart.FirstOrDefault().Stripe_Cvc = Stripe_Cvc;
+                myCart.FirstOrDefault().Stripe_Value = finalTotal;
+                myCart.FirstOrDefault().PaymentMode = paymentModel.Name;
+            }
 
             var session_userKey = await sessionStorage.GetAsync<string>("userKey");
             if(session_userKey.Success)

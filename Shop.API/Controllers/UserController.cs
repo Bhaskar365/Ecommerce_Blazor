@@ -47,14 +47,6 @@ namespace Shop.API.Controllers
             return Ok(data);
         }
 
-        [HttpPost]
-        [Route("Checkout")]
-        public IActionResult Checkout(List<CartModel> cartItems)
-        {
-            var data = _userService.Checkout(cartItems);
-            return Ok(data);
-        }
-
         [HttpGet]
         [Route("GetOrdersByCustomerId")]
         public IActionResult GetOrdersByCustomerId(int CustomerId) 
@@ -102,5 +94,45 @@ namespace Shop.API.Controllers
             var url = await _userService.MakePaymentPaypal(total);
             return Ok(url);
         }
+
+        [HttpPost]
+        [Route("Checkout")]
+        public async Task<IActionResult> Checkout(List<CartModel> cartItems)
+        {
+            ResponseModel responseModel = new ResponseModel();
+            var record = cartItems.FirstOrDefault();
+            if (record != null) 
+            {
+                if(record.PaymentMode == "CashOnDelivery") 
+                {
+                    responseModel = _userService.Checkout(cartItems);
+                }
+                if(record.PaymentMode == "PayPal") 
+                {
+                    var data = _userService.MakePaymentPaypal(record.PayPalPayment);
+                    if(data!=null) 
+                    {
+                        var ref_number = data.Result.Split("&")[1];
+                        cartItems.FirstOrDefault().orderReference = ref_number.Split("=")[1];
+                        responseModel = _userService.Checkout(cartItems);
+                    }
+                }
+                if(record.PaymentMode == "Stripe") 
+                {
+                    var data = await _userService.MakePaymentStripe(record.Stripecard_Number, record.Stripeexp_Month, record.Stripeexp_Year, record.Stripe_Cvc, record.Stripe_Value);
+                    if(data != null && data.Contains("Success")) 
+                    {
+                        cartItems.FirstOrDefault().orderReference = data.Split("=")[1];
+                        responseModel = _userService.Checkout(cartItems);
+                    }
+                }
+            }
+
+            return Ok(responseModel);
+
+            //var data = _userService.Checkout(cartItems);
+            //return Ok(data);
+        }
+
     }
 }

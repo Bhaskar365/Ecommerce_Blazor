@@ -262,6 +262,7 @@ namespace Shop.Logic.Services
         {
             try 
             {
+                string response = string.Empty;
                 StripeConfiguration.ApiKey = "the secret stripe key";
                 var optionToken = new TokenCreateOptions
                 {
@@ -302,13 +303,13 @@ namespace Shop.Logic.Services
 
                 if(charge.Paid) 
                 {
-                    return "Success";
+                    response = "Success" + "=" + charge.BalanceTransactionId;
                 }
                 else 
                 {
                     return "Fail";
                 }
-
+                return response;
             }
             catch(Exception ex) 
             {

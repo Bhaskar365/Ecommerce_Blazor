@@ -18,6 +18,8 @@ namespace Shop.Logic.PayPal
         {
             configuration = _configuration;
         }
+
+        //body response for payment method checker
         public async Task<string> getRedirectURLToPayPal(double total, string currency)
         {
             try
